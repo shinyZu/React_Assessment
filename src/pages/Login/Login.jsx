@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Redirect, useHistory } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
-import login__img from "../../assets/images/store5.jpg";
+import login__img from "../../assets/images/store8.png";
 import { withStyles } from "@mui/styles";
 import { styleSheet } from "./style.js";
 import Typography from "@mui/material/Typography";
@@ -10,6 +10,7 @@ import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import { Grid } from "@mui/material";
 // import { useAuth } from "../Session/Auth";
 import MySnackBar from "../../components/common/Snackbar/MySnackbar";
+import Paper from "@mui/material/Paper";
 
 function Login(props) {
   const { classes } = props;
@@ -29,14 +30,48 @@ function Login(props) {
   return (
     <>
       <div className={classes.login__overlay}>
-        <div className={classes.login__container}>
-          <img src={login__img} className={classes.login__left} width="400px" />
+        {/* <div className={classes.login__container}> */}
+        <Paper
+          sx={{
+            // p: "20px 0px",
+            // display: "flex",
+            // flexDirection: "column",
+            // justifyContent: "center",
+            // alignItems: "center",
+            // width: "100%",
+            backgroundImage: `url("https://www.transparenttextures.com/patterns/wall-4-light.png"); !important`,
+            // backgroundImage: `url("https://www.transparenttextures.com/patterns/transparent-square-tiles.png"); !important`,
+          }}
+          elevation={12}
+          style={{
+            borderRadius: "20px",
+          }}
+          className={classes.login__container}
+        >
+          <img src={login__img} className={classes.login__left} width="380px" />
 
-          <div className={classes.login__right}>
-            <p className={classes.login__closeBtn} onClick={props.onClose}>
-              {/* X */}
-            </p>
+          {/* <div className={classes.login__right}> */}
+          <p className={classes.login__closeBtn} onClick={props.onClose}>
+            {/* X */}
+          </p>
 
+          <Paper
+            sx={{
+              p: "20px 0px",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+              width: "100%",
+              // backgroundImage: `url("https://www.transparenttextures.com/patterns/wall-4-light.png"); !important`,
+              // backgroundImage: `url("https://www.transparenttextures.com/patterns/transparent-square-tiles.png"); !important`,
+            }}
+            elevation={0}
+            style={{
+              borderRadius: "20px",
+            }}
+            className={classes.login__right}
+          >
             <div className={classes.login__title}>
               <Typography className={classes.font__family} variant="h4">
                 Login
@@ -147,8 +182,11 @@ function Login(props) {
                 </Link>
               </p>
             </div>
-          </div>
-        </div>
+          </Paper>
+        </Paper>
+
+        {/* </div> */}
+        {/* </div> */}
       </div>
       <MySnackBar
         open={openErrorMessage.open}

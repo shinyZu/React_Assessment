@@ -2,6 +2,10 @@ export const styleSheet = {
   login__overlay: {
     // border: "2px solid red",
     backgroundColor: " rgba(0, 0, 0, 0.2)",
+    // backgroundImage: `url("https://www.transparenttextures.com/patterns/transparent-square-tiles.png")`,
+    backgroundImage: `url("https://www.transparenttextures.com/patterns/wall-4-light.png")`,
+    backgroundColor: "#ffffff !important",
+    height: "99vh",
   },
 
   login__container: {
@@ -21,14 +25,19 @@ export const styleSheet = {
     backgroundColor: "#ffffff",
     boxShadow: "0px 0px 18px 0px rgba(0, 0, 0, 0.75)",
     borderRadius: "30px",
-    borderBottomLeftRadius: "140px",
+    // borderTopLeftRadius: "100px",
+    // borderTopRightRadius: "100px",
+    borderBottomLeftRadius: "100px",
   },
 
   login__left: {
     // border: "2px solid pink",
+    margin: "40px 10px",
+    // width: "400px",
+    // height: "400px",
     opacity: "0.9",
-    borderTopRightRadius: "140px",
-    borderBottomLeftRadius: "140px",
+    // borderTopRightRadius: "140px",
+    // borderBottomLeftRadius: "140px",
   },
 
   login__right: {
@@ -57,13 +66,12 @@ export const styleSheet = {
     flexDirection: "column",
     justifyContent: "center",
     alignItems: "center",
-    color: "#449c6e",
-    // color: "#4169a9",
+    color: "#4c5887",
   },
 
   login__icon: {
     fontSize: "80px !important",
-    color: "#449c6e !important",
+    color: "#4c5887 !important",
   },
 
   login__content: {
@@ -80,7 +88,7 @@ export const styleSheet = {
   },
 
   btn__login: {
-    backgroundColor: "#449c6e",
+    backgroundColor: "#4c5887",
     // backgroundColor: "#4169a9",
     color: "white",
     padding: "15px",
@@ -89,8 +97,7 @@ export const styleSheet = {
     border: "none",
     "&:hover": {
       cursor: "pointer",
-      // backgroundColor: "#16a085",
-      backgroundColor: "#22995b",
+      backgroundColor: "#273c75",
     },
   },
 

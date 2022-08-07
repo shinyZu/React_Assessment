@@ -220,6 +220,7 @@ function Register(props) {
         sm={12}
         // style={{ border: "2px solid red" /* , height: "100vh" */ }}
         justifyContent="center"
+        className={classes.register_container_1_0}
       >
         <Grid
           container

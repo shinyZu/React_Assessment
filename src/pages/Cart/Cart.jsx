@@ -36,9 +36,10 @@ function Cart(props) {
         md={12}
         sm={12}
         xs={12}
-        style={{ /* border: "2px solid red", */ height: "80vh" }}
+        // style={{ /* border: "2px solid red", */ height: "80vh" }}
         justifyContent="center"
         alignItems="center"
+        className={classes.cart_container_1_0}
       >
         <Grid
           container

@@ -1,4 +1,13 @@
 export const styleSheet = {
+  cart_container_1_0: {
+    // border: "2px solid red",
+    // backgroundImage: `url("https://www.transparenttextures.com/patterns/grid-me.png");`,
+    // backgroundImage: `url("https://www.transparenttextures.com/patterns/straws.png")`,
+    backgroundImage: `url("https://www.transparenttextures.com/patterns/transparent-square-tiles.png")`,
+    backgroundColor: "#ffffff !important",
+    height: "85vh",
+  },
+
   container2: {
     marginTop: "30px",
   },
