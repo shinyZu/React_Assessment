@@ -5,6 +5,7 @@ import Navbar from "../../components/Navbar/Navbar";
 import Grid from "@mui/material/Grid";
 import Typography from "@mui/material/Typography";
 import Paper from "@mui/material/Paper";
+import MyCard from "../../components/Card/Card";
 
 function Dashboard(props) {
   const { classes } = props;
@@ -35,102 +36,9 @@ function Dashboard(props) {
           className={classes.dashboard_container_1_1}
           justifyContent="space-between"
         >
-          <Grid
-            container
-            xl={3.8}
-            lg={3.8}
-            md={3.8}
-            sm={3.8}
-            xs={3.8}
-            className={classes.dashboard_container_1_1_0}
-          >
-            <Paper
-              sx={{
-                p: "20px 0px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "100%",
-                backgroundImage: `url("https://www.transparenttextures.com/patterns/wall-4-light.png"); !important`,
-              }}
-              elevation={12}
-              style={{
-                borderRadius: "20px",
-              }}
-            >
-              <Typography variant="h1" color="#f1c40f" fontSize={200}>
-                {card1}
-              </Typography>
-              <Typography variant="h4" color="#f1c40f">
-                Users
-              </Typography>
-            </Paper>
-          </Grid>
-          <Grid
-            container
-            xl={3.8}
-            lg={3.8}
-            md={3.8}
-            sm={3.8}
-            xs={3.8}
-            className={classes.dashboard_container_1_1_0}
-          >
-            <Paper
-              sx={{
-                p: "20px 0px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "100%",
-                backgroundImage: `url("https://www.transparenttextures.com/patterns/wall-4-light.png"); !important`,
-              }}
-              elevation={12}
-              style={{
-                borderRadius: "20px",
-              }}
-            >
-              <Typography variant="h1" color="#9b59b6" fontSize={200}>
-                {card2}
-              </Typography>
-              <Typography variant="h4" color="#9b59b6">
-                Products
-              </Typography>
-            </Paper>
-          </Grid>
-          <Grid
-            container
-            xl={3.8}
-            lg={3.8}
-            md={3.8}
-            sm={3.8}
-            xs={3.8}
-            className={classes.dashboard_container_1_1_0}
-          >
-            <Paper
-              sx={{
-                p: "20px 0px",
-                display: "flex",
-                flexDirection: "column",
-                justifyContent: "center",
-                alignItems: "center",
-                width: "100%",
-                backgroundImage: `url("https://www.transparenttextures.com/patterns/wall-4-light.png"); !important`,
-              }}
-              elevation={12}
-              style={{
-                borderRadius: "20px",
-              }}
-            >
-              <Typography variant="h1" color="#2ecc71" fontSize={200}>
-                {card3}
-              </Typography>
-              <Typography variant="h4" color="#2ecc71">
-                Cart
-              </Typography>
-            </Paper>
-          </Grid>
+          <MyCard cardNo={card1} cardTitle="Users" color="#f1c40f" />
+          <MyCard cardNo={card2} cardTitle="Users" color="#9b59b6" />
+          <MyCard cardNo={card3} cardTitle="Users" color="#2ecc71" />
         </Grid>
       </Grid>
     </>
