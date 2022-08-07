@@ -9,6 +9,7 @@ import TextField from "@mui/material/TextField";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import sample_img from "../../assets/images/store4.jpg";
 import FileChooser from "../../components/FileChooser/FileChooser";
+import MyTextValidator from "../../components/common/TextValidator/TextValidator.jsx";
 
 function Product(props) {
   const { classes } = props;
@@ -76,60 +77,53 @@ function Product(props) {
               // style={{ border: "2px solid red" }}
               justifyContent="space-between"
             >
-              <Grid
-                item
+              <MyTextValidator
+                gridtType="item"
                 xl={5.8}
                 lg={5.8}
                 md={5.8}
                 xs={5.8}
                 sm={5.8}
-                // style={{ border: "2px solid blue" }}
-              >
-                <TextValidator
-                  label="Title"
-                  type="text"
-                  variant="outlined"
-                  fullWidth
-                  required={true}
-                  style={{ marginBottom: "7vh" }}
-                  validators={["matchRegexp:^[A-z0-9-\\s]*$"]}
-                  errorMessages={["Invalid Title"]}
-                  value={productFormData.title}
-                  onChange={(e) => {
-                    setProductFormdata({
-                      ...productFormData,
-                      title: e.target.value,
-                    });
-                  }}
-                />
-              </Grid>
-              <Grid
-                item
+                label="Title"
+                type="text"
+                variant="outlined"
+                fullWidth
+                required={true}
+                style={{ marginBottom: "7vh" }}
+                validators={["matchRegexp:^[A-z0-9-\\s]*$"]}
+                errorMessages={["Invalid Title"]}
+                value={productFormData.title}
+                onChange={(e) => {
+                  setProductFormdata({
+                    ...productFormData,
+                    title: e.target.value,
+                  });
+                }}
+              />
+
+              <MyTextValidator
+                gridtType="item"
                 xl={5.8}
                 lg={5.8}
                 md={5.8}
                 xs={5.8}
                 sm={5.8}
-                // style={{ border: "2px solid blue" }}
-              >
-                <TextValidator
-                  label="Price"
-                  type="number"
-                  variant="outlined"
-                  fullWidth
-                  required={true}
-                  style={{ marginBottom: "7vh" }}
-                  validators={["matchRegexp:^[0-9.]*$"]}
-                  errorMessages={["Input only numbers"]}
-                  value={productFormData.price}
-                  onChange={(e) => {
-                    setProductFormdata({
-                      ...productFormData,
-                      price: e.target.value,
-                    });
-                  }}
-                />
-              </Grid>
+                label="Price"
+                type="number"
+                variant="outlined"
+                fullWidth
+                required={true}
+                style={{ marginBottom: "7vh" }}
+                validators={["matchRegexp:^[0-9.]*$"]}
+                errorMessages={["Input only numbers"]}
+                value={productFormData.price}
+                onChange={(e) => {
+                  setProductFormdata({
+                    ...productFormData,
+                    price: e.target.value,
+                  });
+                }}
+              />
             </Grid>
 
             <Grid
@@ -167,37 +161,32 @@ function Product(props) {
                   }}
                 />
               </Grid>
-              <Grid
-                item
+
+              <MyTextValidator
+                gridtType="item"
                 xl={5.8}
                 lg={5.8}
                 md={5.8}
                 xs={5.8}
                 sm={5.8}
-                // style={{ border: "2px solid blue" }}
-              >
-                <TextValidator
-                  label="Description"
-                  type="text"
-                  variant="outlined"
-                  fullWidth
-                  multiline
-                  minRows={2}
-                  // size="small"
-                  required={true}
-                  style={{ marginBottom: "7vh" }}
-                  // validators={["matchRegexp:^[0-9.]*$"]}
-                  // errorMessages={["Input only numbers"]}
-                  value={productFormData.description}
-                  onChange={(e) => {
-                    setProductFormdata({
-                      ...productFormData,
-                      description: e.target.value,
-                    });
-                  }}
-                />
-              </Grid>
+                label="Description"
+                type="text"
+                variant="outlined"
+                fullWidth
+                multiline={true}
+                minRows={2}
+                required={true}
+                style={{ marginBottom: "7vh" }}
+                value={productFormData.description}
+                onChange={(e) => {
+                  setProductFormdata({
+                    ...productFormData,
+                    description: e.target.value,
+                  });
+                }}
+              />
             </Grid>
+
             <Grid
               container
               xl={5.8}
@@ -225,6 +214,7 @@ function Product(props) {
                 <FileChooser text="Choose Image" />
               </Grid>
             </Grid>
+
             <Grid
               container
               xl={12}

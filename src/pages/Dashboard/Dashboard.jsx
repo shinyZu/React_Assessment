@@ -37,8 +37,8 @@ function Dashboard(props) {
           justifyContent="space-between"
         >
           <MyCard cardNo={card1} cardTitle="Users" color="#f1c40f" />
-          <MyCard cardNo={card2} cardTitle="Users" color="#9b59b6" />
-          <MyCard cardNo={card3} cardTitle="Users" color="#2ecc71" />
+          <MyCard cardNo={card2} cardTitle="Products" color="#9b59b6" />
+          <MyCard cardNo={card3} cardTitle="Cart" color="#2ecc71" />
         </Grid>
       </Grid>
     </>

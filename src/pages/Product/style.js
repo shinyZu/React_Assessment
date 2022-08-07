@@ -5,7 +5,6 @@ export const styleSheet = {
 
   car__views: {
     // border: "2px solid orange !important",
-    // width: "25%",
     width: "23.5%",
     backgroundSize: "cover",
     backgroundPosition: "bottom",
@@ -17,8 +16,6 @@ export const styleSheet = {
 
   save_btn_container: {
     // border: "2px solid blue",
-    // display: "flex",
-    // justifyContent: "center",
     marginTop: "50px",
   },
 

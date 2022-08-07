@@ -10,6 +10,7 @@ import Tooltip from "@mui/material/Tooltip";
 import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
+import MyTextValidator from "../../components/common/TextValidator/TextValidator.jsx";
 
 function Register(props) {
   const { classes } = props;
@@ -268,60 +269,52 @@ function Register(props) {
                 // style={{ border: "2px solid red" }}
                 justifyContent="space-between"
               >
-                <Grid
-                  item
+                <MyTextValidator
+                  gridType="item"
                   xl={5.8}
                   lg={5.8}
                   md={5.8}
                   xs={5.8}
                   sm={5.8}
-                  //   style={{ border: "2px solid blue" }}
-                >
-                  <TextValidator
-                    label="First Name"
-                    type="text"
-                    variant="outlined"
-                    fullWidth
-                    required={true}
-                    style={{ marginBottom: "15px" }}
-                    validators={["matchRegexp:^[A-Z][a-z]*$"]}
-                    errorMessages={["Invalid Name"]}
-                    value={regFormData.firstName}
-                    onChange={(e) => {
-                      setRegFormData({
-                        ...regFormData,
-                        firstName: e.target.value,
-                      });
-                    }}
-                  />
-                </Grid>
-                <Grid
-                  item
+                  label="First Name"
+                  type="text"
+                  variant="outlined"
+                  fullWidth
+                  required={true}
+                  style={{ marginBottom: "15px" }}
+                  validators={["matchRegexp:^[A-z]*$"]}
+                  errorMessages={["Invalid Name"]}
+                  value={regFormData.firstName}
+                  onChange={(e) => {
+                    setRegFormData({
+                      ...regFormData,
+                      firstName: e.target.value,
+                    });
+                  }}
+                />
+                <MyTextValidator
+                  gridType="item"
                   xl={5.8}
                   lg={5.8}
                   md={5.8}
                   xs={5.8}
                   sm={5.8}
-                  //   style={{ border: "2px solid blue" }}
-                >
-                  <TextValidator
-                    label="Last Name"
-                    type="text"
-                    variant="outlined"
-                    fullWidth
-                    required={true}
-                    style={{ marginBottom: "15px" }}
-                    validators={["matchRegexp:^[A-Z][a-z]*$"]}
-                    errorMessages={["Invalid Name"]}
-                    value={regFormData.lastName}
-                    onChange={(e) => {
-                      setRegFormData({
-                        ...regFormData,
-                        lastName: e.target.value,
-                      });
-                    }}
-                  />
-                </Grid>
+                  label="Last Name"
+                  type="text"
+                  variant="outlined"
+                  fullWidth
+                  required={true}
+                  style={{ marginBottom: "15px" }}
+                  validators={["matchRegexp:^[A-z]*$"]}
+                  errorMessages={["Invalid Name"]}
+                  value={regFormData.lastName}
+                  onChange={(e) => {
+                    setRegFormData({
+                      ...regFormData,
+                      lastName: e.target.value,
+                    });
+                  }}
+                />
               </Grid>
 
               <Grid
@@ -334,61 +327,52 @@ function Register(props) {
                 // style={{ border: "2px solid red" }}
                 justifyContent="space-between"
               >
-                <Grid
-                  item
+                <MyTextValidator
+                  gridType="item"
                   xl={5.8}
                   lg={5.8}
                   md={5.8}
                   xs={5.8}
                   sm={5.8}
-                  //   style={{ border: "2px solid blue" }}
-                >
-                  <TextValidator
-                    label="Email"
-                    type="email"
-                    variant="outlined"
-                    fullWidth
-                    required={true}
-                    style={{ marginBottom: "15px" }}
-                    validators={[
-                      "matchRegexp:^[A-z|0-9]{4,}@(gmail)(.com|.lk)$",
-                    ]}
-                    errorMessages={["Invalid Email Address"]}
-                    value={regFormData.email}
-                    onChange={(e) => {
-                      setRegFormData({
-                        ...regFormData,
-                        email: e.target.value,
-                      });
-                    }}
-                  />
-                </Grid>
-                <Grid
-                  item
+                  label="Email"
+                  type="email"
+                  variant="outlined"
+                  fullWidth
+                  required={true}
+                  style={{ marginBottom: "15px" }}
+                  validators={["matchRegexp:^[A-z|0-9]{4,}@(gmail)(.com|.lk)$"]}
+                  errorMessages={["Invalid Email Address"]}
+                  value={regFormData.email}
+                  onChange={(e) => {
+                    setRegFormData({
+                      ...regFormData,
+                      email: e.target.value,
+                    });
+                  }}
+                />
+
+                <MyTextValidator
+                  gridType="item"
                   xl={5.8}
                   lg={5.8}
                   md={5.8}
                   xs={5.8}
                   sm={5.8}
-                  //   style={{ border: "2px solid blue" }}
-                >
-                  <TextValidator
-                    label="Username"
-                    type="text"
-                    variant="outlined"
-                    fullWidth
-                    required={true}
-                    validators={["matchRegexp:^[A-z0-9]*$"]}
-                    errorMessages={["Invalid Name"]}
-                    value={regFormData.username}
-                    onChange={(e) => {
-                      setRegFormData({
-                        ...regFormData,
-                        username: e.target.value,
-                      });
-                    }}
-                  />
-                </Grid>
+                  label="Username"
+                  type="text"
+                  variant="outlined"
+                  fullWidth
+                  required={true}
+                  validators={["matchRegexp:^[A-z0-9]*$"]}
+                  errorMessages={["Invalid Name"]}
+                  value={regFormData.username}
+                  onChange={(e) => {
+                    setRegFormData({
+                      ...regFormData,
+                      username: e.target.value,
+                    });
+                  }}
+                />
               </Grid>
 
               <Grid
@@ -401,59 +385,52 @@ function Register(props) {
                 // style={{ border: "2px solid red" }}
                 justifyContent="space-between"
               >
-                <Grid
-                  item
+                <MyTextValidator
+                  gridType="item"
                   xl={5.8}
                   lg={5.8}
                   md={5.8}
                   xs={5.8}
                   sm={5.8}
-                  //   style={{ border: "2px solid blue" }}
-                >
-                  <TextValidator
-                    label="Password"
-                    type="password"
-                    variant="outlined"
-                    fullWidth
-                    required={true}
-                    style={{ marginBottom: "15px" }}
-                    validators={["matchRegexp:^[A-z|0-9|@]{8,}$"]}
-                    errorMessages={["must have atleast 8 characters"]}
-                    value={regFormData.password}
-                    onChange={(e) => {
-                      setRegFormData({
-                        ...regFormData,
-                        password: e.target.value,
-                      });
-                    }}
-                  />
-                </Grid>
-                <Grid
-                  item
+                  label="Password"
+                  type="password"
+                  variant="outlined"
+                  fullWidth
+                  required={true}
+                  style={{ marginBottom: "15px" }}
+                  validators={["matchRegexp:^[A-z|0-9|@]{8,}$"]}
+                  errorMessages={["must have atleast 8 characters"]}
+                  value={regFormData.password}
+                  onChange={(e) => {
+                    setRegFormData({
+                      ...regFormData,
+                      password: e.target.value,
+                    });
+                  }}
+                />
+
+                <MyTextValidator
+                  gridType="item"
                   xl={5.8}
                   lg={5.8}
                   md={5.8}
                   xs={5.8}
                   sm={5.8}
-                  //   style={{ border: "2px solid blue" }}
-                >
-                  <TextValidator
-                    label="City"
-                    type="text"
-                    variant="outlined"
-                    fullWidth
-                    required={true}
-                    validators={["matchRegexp:^[A-z0-9]*$"]}
-                    errorMessages={["Invalid City Name"]}
-                    value={regFormData.city}
-                    onChange={(e) => {
-                      setRegFormData({
-                        ...regFormData,
-                        city: e.target.value,
-                      });
-                    }}
-                  />
-                </Grid>
+                  label="City"
+                  type="text"
+                  variant="outlined"
+                  fullWidth
+                  required={true}
+                  validators={["matchRegexp:^[A-z0-9]*$"]}
+                  errorMessages={["Invalid City Name"]}
+                  value={regFormData.city}
+                  onChange={(e) => {
+                    setRegFormData({
+                      ...regFormData,
+                      city: e.target.value,
+                    });
+                  }}
+                />
               </Grid>
 
               <Grid
@@ -466,59 +443,52 @@ function Register(props) {
                 // style={{ border: "2px solid red" }}
                 justifyContent="space-between"
               >
-                <Grid
-                  item
+                <MyTextValidator
+                  gridType="item"
                   xl={5.8}
                   lg={5.8}
                   md={5.8}
                   xs={5.8}
                   sm={5.8}
-                  //   style={{ border: "2px solid blue" }}
-                >
-                  <TextValidator
-                    label="Street"
-                    type="text"
-                    variant="outlined"
-                    fullWidth
-                    required={true}
-                    style={{ marginBottom: "15px" }}
-                    validators={["matchRegexp:^[A-z0-9\\s]*$"]}
-                    errorMessages={["Invalid Street Name"]}
-                    value={regFormData.street}
-                    onChange={(e) => {
-                      setRegFormData({
-                        ...regFormData,
-                        street: e.target.value,
-                      });
-                    }}
-                  />
-                </Grid>
-                <Grid
-                  item
+                  label="Street"
+                  type="text"
+                  variant="outlined"
+                  fullWidth
+                  required={true}
+                  style={{ marginBottom: "15px" }}
+                  validators={["matchRegexp:^[A-z0-9\\s]*$"]}
+                  errorMessages={["Invalid Street Name"]}
+                  value={regFormData.street}
+                  onChange={(e) => {
+                    setRegFormData({
+                      ...regFormData,
+                      street: e.target.value,
+                    });
+                  }}
+                />
+
+                <MyTextValidator
+                  gridType="item"
                   xl={5.8}
                   lg={5.8}
                   md={5.8}
                   xs={5.8}
                   sm={5.8}
-                  //   style={{ border: "2px solid blue" }}
-                >
-                  <TextValidator
-                    label="Street No"
-                    type="text"
-                    variant="outlined"
-                    fullWidth
-                    required={true}
-                    validators={["matchRegexp:^[A-z0-9]*$"]}
-                    errorMessages={["Invalid Characters"]}
-                    value={regFormData.streetNo}
-                    onChange={(e) => {
-                      setRegFormData({
-                        ...regFormData,
-                        streetNo: e.target.value,
-                      });
-                    }}
-                  />
-                </Grid>
+                  label="Street No"
+                  type="text"
+                  variant="outlined"
+                  fullWidth
+                  required={true}
+                  validators={["matchRegexp:^[A-z0-9]*$"]}
+                  errorMessages={["Invalid Characters"]}
+                  value={regFormData.streetNo}
+                  onChange={(e) => {
+                    setRegFormData({
+                      ...regFormData,
+                      streetNo: e.target.value,
+                    });
+                  }}
+                />
               </Grid>
 
               <Grid
@@ -531,59 +501,52 @@ function Register(props) {
                 // style={{ border: "2px solid red" }}
                 justifyContent="space-between"
               >
-                <Grid
-                  item
+                <MyTextValidator
+                  gridType="item"
                   xl={5.8}
                   lg={5.8}
                   md={5.8}
                   xs={5.8}
                   sm={5.8}
-                  //   style={{ border: "2px solid blue" }}
-                >
-                  <TextValidator
-                    label="Zip Code"
-                    type="text"
-                    variant="outlined"
-                    fullWidth
-                    required={true}
-                    style={{ marginBottom: "15px" }}
-                    validators={["matchRegexp:^[A-z0-9-]*$"]}
-                    errorMessages={["Invalid Zip Code"]}
-                    value={regFormData.zipCode}
-                    onChange={(e) => {
-                      setRegFormData({
-                        ...regFormData,
-                        zipCode: e.target.value,
-                      });
-                    }}
-                  />
-                </Grid>
-                <Grid
-                  item
+                  label="Zip Code"
+                  type="text"
+                  variant="outlined"
+                  fullWidth
+                  required={true}
+                  style={{ marginBottom: "15px" }}
+                  validators={["matchRegexp:^[A-z0-9-]*$"]}
+                  errorMessages={["Invalid Zip Code"]}
+                  value={regFormData.zipCode}
+                  onChange={(e) => {
+                    setRegFormData({
+                      ...regFormData,
+                      zipCode: e.target.value,
+                    });
+                  }}
+                />
+
+                <MyTextValidator
+                  gridType="item"
                   xl={5.8}
                   lg={5.8}
                   md={5.8}
                   xs={5.8}
                   sm={5.8}
-                  //   style={{ border: "2px solid blue" }}
-                >
-                  <TextValidator
-                    label="Lat Value"
-                    type="text"
-                    variant="outlined"
-                    fullWidth
-                    required={true}
-                    validators={["matchRegexp:^[0-9.-]*$"]}
-                    errorMessages={["Invalid Lat Value"]}
-                    value={regFormData.latValue}
-                    onChange={(e) => {
-                      setRegFormData({
-                        ...regFormData,
-                        latValue: e.target.value,
-                      });
-                    }}
-                  />
-                </Grid>
+                  label="Lat Value"
+                  type="text"
+                  variant="outlined"
+                  fullWidth
+                  required={true}
+                  validators={["matchRegexp:^[0-9.-]*$"]}
+                  errorMessages={["Invalid Lat Value"]}
+                  value={regFormData.latValue}
+                  onChange={(e) => {
+                    setRegFormData({
+                      ...regFormData,
+                      latValue: e.target.value,
+                    });
+                  }}
+                />
               </Grid>
 
               <Grid
@@ -596,59 +559,52 @@ function Register(props) {
                 // style={{ border: "2px solid red" }}
                 justifyContent="space-between"
               >
-                <Grid
-                  item
+                <MyTextValidator
+                  gridType="item"
                   xl={5.8}
                   lg={5.8}
                   md={5.8}
                   xs={5.8}
                   sm={5.8}
-                  //   style={{ border: "2px solid blue" }}
-                >
-                  <TextValidator
-                    label="Long Value"
-                    type="text"
-                    variant="outlined"
-                    fullWidth
-                    required={true}
-                    style={{ marginBottom: "15px" }}
-                    validators={["matchRegexp:^[0-9.-]*$"]}
-                    errorMessages={["Invalid Long Value"]}
-                    value={regFormData.longValue}
-                    onChange={(e) => {
-                      setRegFormData({
-                        ...regFormData,
-                        longValue: e.target.value,
-                      });
-                    }}
-                  />
-                </Grid>
-                <Grid
-                  item
+                  label="Long Value"
+                  type="text"
+                  variant="outlined"
+                  fullWidth
+                  required={true}
+                  style={{ marginBottom: "15px" }}
+                  validators={["matchRegexp:^[0-9.-]*$"]}
+                  errorMessages={["Invalid Long Value"]}
+                  value={regFormData.longValue}
+                  onChange={(e) => {
+                    setRegFormData({
+                      ...regFormData,
+                      longValue: e.target.value,
+                    });
+                  }}
+                />
+
+                <MyTextValidator
+                  gridType="item"
                   xl={5.8}
                   lg={5.8}
                   md={5.8}
                   xs={5.8}
                   sm={5.8}
-                  //   style={{ border: "2px solid blue" }}
-                >
-                  <TextValidator
-                    label="Mobile No"
-                    type="text"
-                    variant="outlined"
-                    fullWidth
-                    required={true}
-                    validators={["matchRegexp:^[0-9\\-]{14}$"]}
-                    errorMessages={["Invalid Mobile No"]}
-                    value={regFormData.mobileNo}
-                    onChange={(e) => {
-                      setRegFormData({
-                        ...regFormData,
-                        mobileNo: e.target.value,
-                      });
-                    }}
-                  />
-                </Grid>
+                  label="Mobile No"
+                  type="text"
+                  variant="outlined"
+                  fullWidth
+                  required={true}
+                  validators={["matchRegexp:^[0-9\\-]{14}$"]}
+                  errorMessages={["Invalid Mobile No"]}
+                  value={regFormData.mobileNo}
+                  onChange={(e) => {
+                    setRegFormData({
+                      ...regFormData,
+                      mobileNo: e.target.value,
+                    });
+                  }}
+                />
               </Grid>
 
               <Grid
