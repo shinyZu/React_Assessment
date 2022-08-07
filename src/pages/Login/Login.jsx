@@ -30,17 +30,9 @@ function Login(props) {
   return (
     <>
       <div className={classes.login__overlay}>
-        {/* <div className={classes.login__container}> */}
         <Paper
           sx={{
-            // p: "20px 0px",
-            // display: "flex",
-            // flexDirection: "column",
-            // justifyContent: "center",
-            // alignItems: "center",
-            // width: "100%",
             backgroundImage: `url("https://www.transparenttextures.com/patterns/wall-4-light.png"); !important`,
-            // backgroundImage: `url("https://www.transparenttextures.com/patterns/transparent-square-tiles.png"); !important`,
           }}
           elevation={12}
           style={{
@@ -50,7 +42,6 @@ function Login(props) {
         >
           <img src={login__img} className={classes.login__left} width="380px" />
 
-          {/* <div className={classes.login__right}> */}
           <p className={classes.login__closeBtn} onClick={props.onClose}>
             {/* X */}
           </p>
@@ -63,8 +54,6 @@ function Login(props) {
               justifyContent: "center",
               alignItems: "center",
               width: "100%",
-              // backgroundImage: `url("https://www.transparenttextures.com/patterns/wall-4-light.png"); !important`,
-              // backgroundImage: `url("https://www.transparenttextures.com/patterns/transparent-square-tiles.png"); !important`,
             }}
             elevation={0}
             style={{
@@ -172,21 +161,11 @@ function Login(props) {
             <div className={classes.login__footer}>
               <p>
                 Create a new user account? &nbsp;{" "}
-                <Link
-                  to="/register"
-                  // onClick={() => {
-                  //   props.onSwitch();
-                  // }}
-                >
-                  Register
-                </Link>
+                <Link to="/register">Register</Link>
               </p>
             </div>
           </Paper>
         </Paper>
-
-        {/* </div> */}
-        {/* </div> */}
       </div>
       <MySnackBar
         open={openErrorMessage.open}

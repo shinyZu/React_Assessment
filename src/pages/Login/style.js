@@ -20,24 +20,13 @@ export const styleSheet = {
     bottom: "0",
     left: "0",
     margin: "auto",
-    // transform: "translate(-50%, -50%)",
     display: "flex",
-    backgroundColor: "#ffffff",
-    boxShadow: "0px 0px 18px 0px rgba(0, 0, 0, 0.75)",
-    borderRadius: "30px",
-    // borderTopLeftRadius: "100px",
-    // borderTopRightRadius: "100px",
-    borderBottomLeftRadius: "100px",
   },
 
   login__left: {
     // border: "2px solid pink",
     margin: "40px 10px",
-    // width: "400px",
-    // height: "400px",
     opacity: "0.9",
-    // borderTopRightRadius: "140px",
-    // borderBottomLeftRadius: "140px",
   },
 
   login__right: {
@@ -77,7 +66,6 @@ export const styleSheet = {
   login__content: {
     // border: "2px solid orange",
     padding: "10px 25px",
-    // marginTop: "10%",
   },
 
   login_btn_container: {
@@ -108,9 +96,5 @@ export const styleSheet = {
     padding: "0px",
     fontSize: "14px",
     marginTop: "-15px",
-  },
-
-  font__family: {
-    // fontFamily: '"Acme", sans-serif !important',
   },
 };

@@ -4,6 +4,7 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import Login from "../pages/Login/Login";
 import Product from "../pages/Product/Product";
 import Register from "../pages/Register/Register";
+import NotFound from "../pages/Session/NotFound";
 import "./App.css";
 
 function App() {
@@ -16,6 +17,7 @@ function App() {
         <Route path="/product" element={<Product />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
         <Route path="/profile" element={<Cart />}></Route>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </>
   );
