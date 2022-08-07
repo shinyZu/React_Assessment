@@ -25,7 +25,7 @@ body {
 }
 
 ::-webkit-scrollbar {
-  width: 12px;
+  width: 10px;
 }
 
 ::-webkit-scrollbar:horizontal {
@@ -37,8 +37,9 @@ body {
 }
 
 ::-webkit-scrollbar-thumb {
-  background-color: #16a085;
+  background-color: #273c75;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 ::-webkit-scrollbar-track {
@@ -64,7 +65,7 @@ body {
 
 .css-78trlr-MuiButtonBase-root-MuiIconButton-root {
   /* background-color: rgb(225 218 17 / 72%) !important; */
-  color: #16a085 !important;
+  color: #2980b9 !important;
   height: 45px;
   width: 45px;
   margin-left: 10px;

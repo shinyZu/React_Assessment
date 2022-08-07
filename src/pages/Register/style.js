@@ -11,7 +11,7 @@ export const styleSheet = {
   },
 
   btn__register: {
-    backgroundColor: "#2980cc",
+    backgroundColor: "#1abc9c",
     color: "white",
     padding: "15px",
     width: "47%",
@@ -20,7 +20,7 @@ export const styleSheet = {
     marginLeft: "15px",
     "&:hover": {
       cursor: "pointer",
-      backgroundColor: "#2980b9",
+      backgroundColor: "#16a085",
     },
   },
 

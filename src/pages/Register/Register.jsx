@@ -706,8 +706,11 @@ function Register(props) {
                 // border: 2,
 
                 "& .header_color": {
-                  backgroundColor: "#16a085",
+                  // backgroundColor: "#2980b9",
                   color: "white",
+                  background: "linear-gradient(280deg,#205a76,#2980b9)",
+                  backgroundImage: `url("https://www.transparenttextures.com/patterns/vintage-speckles.png")`,
+                  backgroundColor: "#273c75",
                 },
               }}
             >
