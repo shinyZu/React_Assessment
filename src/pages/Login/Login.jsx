@@ -138,10 +138,10 @@ function Login(props) {
               <p>
                 Create a new user account? &nbsp;{" "}
                 <Link
-                  to="#register"
-                  onClick={() => {
-                    props.onSwitch();
-                  }}
+                  to="/register"
+                  // onClick={() => {
+                  //   props.onSwitch();
+                  // }}
                 >
                   Register
                 </Link>
