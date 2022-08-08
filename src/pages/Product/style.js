@@ -12,7 +12,7 @@ export const styleSheet = {
     marginTop: "30px",
   },
 
-  car__views: {
+  product__img: {
     // border: "2px solid orange !important",
     width: "23.5%",
     backgroundSize: "cover",
@@ -25,7 +25,7 @@ export const styleSheet = {
 
   save_btn_container: {
     // border: "2px solid blue",
-    marginTop: "50px",
+    // marginTop: "50px",
   },
 
   btn__save: {

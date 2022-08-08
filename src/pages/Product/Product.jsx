@@ -7,28 +7,129 @@ import Typography from "@mui/material/Typography";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import sample_img from "../../assets/images/store4.jpg";
+import sample_img from "../../assets/images/question.jpg";
 import FileChooser from "../../components/FileChooser/FileChooser";
 import MyTextValidator from "../../components/common/TextValidator/TextValidator.jsx";
+import ProductService from "../../services/ProductService";
+import MySnackBar from "../../components/common/Snackbar/MySnackbar";
+import ConfirmDialog from "../../components/common/ConfirmDialog/ConfirmDialog";
 
 function Product(props) {
   const { classes } = props;
-  const categories = ["Customer", "Admin", "Driver"];
+  // const categories = ["Customer", "Admin", "Driver"];
+  const [categories, setCategories] = useState([]);
   const [productFormData, setProductFormdata] = useState({
     title: "",
     price: "",
-    category: "",
     description: "",
+    image: "",
+    category: "",
   });
 
   const [userName, setUserName] = useState("");
+  const [productImg, setProductImg] = useState(sample_img);
+
+  const [openAlert, setOpenAlert] = useState({
+    open: "",
+    alert: "",
+    severity: "",
+    variant: "",
+  });
+
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: "",
+    subTitle: "",
+    confirmBtnStyle: {},
+    action: "",
+  });
 
   useEffect(() => {
     setUserName(JSON.parse(localStorage.getItem("userName")));
+    getAllCategories();
   }, []);
 
-  function saveProduct() {}
-  function clearFieldsOnClick() {}
+  async function getAllCategories() {
+    let res = await ProductService.getAllProductCategories();
+    if (res.status === 200) {
+      setCategories(res.data);
+    }
+  }
+
+  async function saveProduct() {
+    console.log(productFormData);
+
+    if (productFormData.image != "") {
+      console.log("empty");
+      setConfirmDialog({
+        isOpen: true,
+        title: "Are you sure you want to Save this Product ?",
+        subTitle: "You can't revert this operation",
+        action: "Save",
+        confirmBtnStyle: {
+          backgroundColor: "rgb(26, 188, 156)",
+          color: "white",
+        },
+        onConfirm: async () => {
+          let res = await ProductService.saveProduct(productFormData);
+          console.log(res);
+          if (res.status === 200) {
+            setOpenAlert({
+              open: true,
+              alert: "Product Saved Successfully",
+              severity: "success",
+              variant: "standard",
+            });
+            clearFieldsOnClick();
+            setConfirmDialog({ isOpen: false });
+          } else {
+            setConfirmDialog({ isOpen: false });
+            setOpenAlert({
+              open: true,
+              alert: res.response.data,
+              severity: "error",
+              variant: "standard",
+            });
+          }
+        },
+      });
+    } else {
+      setOpenAlert({
+        open: true,
+        alert: "Please Choose an Image for the Product!!",
+        severity: "warning",
+        variant: "standard",
+      });
+    }
+  }
+
+  function handleUpload(e) {
+    const { files } = e.target;
+    const fileReader = new FileReader();
+    fileReader.onload = (e) => {
+      const { result } = e.target;
+      // console.log(files); // FileList {0: File, length: 1}
+      // console.log(result); // data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/7QP0UGhvdG9zaG9wIDMuMAA4QklNA+0AAAAAABAASAAAAAEAAQBIAAAAAQABOEJJTQQEAAAAAAOfHAFaAAMbJUccAQAAAgAEHAIAAAIABBwCBQAuTWFuIE9wZW4gR3JvY2VyeSBTdG9yZSBEb29yIEN1c3RvbWVyIHdpdGggRm9vZBwCGQAFc3RvcmUcAhkACSBjdXN0b21lchwCGQAMIHN1cGVybWFya2V0HAIZAAggZ3JvY2VyeRwCGQAHIG1hcmtldBwCGQAFIGZvb2QcAhkAByByZXRhaWwcAhkABiB3b21hbhwCGQAHIHBlb3BsZRwCGQAFIHNob3AcAhkAByBmZW1hbGUcAhkABSBzYWxlHAIZAAkgcHVyY2hhc2UcAhkACiB2ZWdldGFibGUcAhkABiBmcnVpdBwCGQAHIHZlY3RvchwCGQANIGlsbHVzdHJhdGlv........
+      if (result) {
+        setProductImg(result); // url
+      }
+    };
+    fileReader.readAsDataURL(files[0]);
+  }
+
+  function clearFieldsOnClick() {
+    setProductFormdata({
+      title: "",
+      price: "",
+      description: "",
+      image: "",
+      category: "",
+    });
+    setProductImg(sample_img);
+    setCategories([]);
+    getAllCategories();
+  }
+
   return (
     <>
       <Navbar username={userName} />
@@ -74,7 +175,8 @@ function Product(props) {
           sm={11}
           style={{
             // border: "2px solid blue",
-            marginTop: "1%",
+            // marginTop: "1%",
+            padding: "50px 0px 10px 0px",
             height: "fit-content",
           }}
         >
@@ -102,7 +204,7 @@ function Product(props) {
                 fullWidth
                 required={true}
                 style={{ marginBottom: "7vh" }}
-                validators={["matchRegexp:^[A-z0-9-\\s]*$"]}
+                validators={["matchRegexp:^[A-z0-9-\\s,']*$"]}
                 errorMessages={["Invalid Title"]}
                 value={productFormData.title}
                 onChange={(e) => {
@@ -158,8 +260,9 @@ function Product(props) {
                 // style={{ border: "2px solid blue" }}
               >
                 <Autocomplete
+                  id="category"
                   disablePortal
-                  id="role"
+                  inputValue={productFormData.category}
                   options={categories}
                   renderInput={(params) => (
                     <TextField {...params} label="Category" />
@@ -188,7 +291,7 @@ function Product(props) {
                 multiline={true}
                 minRows={2}
                 required={true}
-                style={{ marginBottom: "7vh" }}
+                // style={{ marginBottom: "7vh" }}
                 value={productFormData.description}
                 onChange={(e) => {
                   setProductFormdata({
@@ -210,7 +313,7 @@ function Product(props) {
               justifyContent="start"
               direction="row"
             >
-              <img src={sample_img} className={classes.car__views} />
+              <img src={productImg} className={classes.product__img} />
               <Grid
                 container
                 xl={5.8}
@@ -223,7 +326,17 @@ function Product(props) {
                 alignItems="end"
                 // direction="row"
               >
-                <FileChooser text="Choose Image" />
+                <FileChooser
+                  text="Choose Image"
+                  onUpload={(e) => {
+                    handleUpload(e);
+                    setProductFormdata({
+                      ...productFormData,
+                      image: e.target.files[0].name,
+                    });
+                    console.log(productFormData);
+                  }}
+                />
               </Grid>
             </Grid>
 
@@ -260,6 +373,19 @@ function Product(props) {
           </ValidatorForm>
         </Grid>
       </Grid>
+      <MySnackBar
+        open={openAlert.open}
+        alert={openAlert.alert}
+        severity={openAlert.severity}
+        variant={openAlert.variant}
+        onClose={() => {
+          setOpenAlert({ open: false });
+        }}
+      />
+      <ConfirmDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+      />
     </>
   );
 }

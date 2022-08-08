@@ -48,6 +48,7 @@ function Dashboard(props) {
 
   async function getProductCount() {
     let res = await ProductService.getAllProducts();
+    console.log(res);
     if (res.status === 200) {
       let count;
       if (res.data.length < 10) {
