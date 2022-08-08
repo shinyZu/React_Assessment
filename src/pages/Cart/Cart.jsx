@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { withStyles } from "@mui/styles";
 import { styleSheet } from "./style.js";
 import { Grid } from "@mui/material";
@@ -24,11 +24,18 @@ function Cart(props) {
     title: "",
     qty: "",
   });
+
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    setUserName(JSON.parse(localStorage.getItem("userName")));
+  }, []);
+
   function saveOrder() {}
   function clearFieldsOnClick() {}
   return (
     <>
-      <Navbar />
+      <Navbar username={userName} />
       <Grid
         container
         xl={12}

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { styleSheet } from "./style";
 import { withStyles } from "@mui/styles";
 import Navbar from "../../components/Navbar/Navbar";
@@ -8,20 +8,22 @@ import Paper from "@mui/material/Paper";
 
 function MyCard(props) {
   const { classes } = props;
+  const [screen, setScreen] = useState(3.8);
   return (
     <>
       <Grid
         container
         xl={3.8}
         lg={3.8}
-        md={3.8}
-        sm={3.8}
-        xs={3.8}
-        className={classes.dashboard_container_1_1_0}
+        md={10}
+        sm={10}
+        xs={10}
+        style={{ /* border: "2px solid blue",  */ padding: "20px" }}
+        // className={classes.dashboard_container_1_1_0}
       >
         <Paper
           sx={{
-            p: "20px 0px",
+            p: "60px 20px",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",

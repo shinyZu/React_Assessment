@@ -11,17 +11,45 @@ import { HashLink } from "react-router-hash-link";
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import Tab from "@mui/material/Tab";
+import ConfirmDialog from "../common/ConfirmDialog/ConfirmDialog";
 
 function Navbar(props) {
   const { classes } = props;
   const [value, setValue] = useState("");
-  function changePage() {}
-  function handleCustomerLogout() {}
+
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: "",
+    subTitle: "",
+    confirmBtnStyle: {},
+    action: "",
+  });
+
   const navLinkStyle = ({ isActive }) => {
     return {
       color: isActive ? "rgb(244 249 0)" : "normal",
     };
   };
+
+  const navigate = useNavigate();
+
+  function changePage() {}
+  function handleCustomerLogout() {
+    setConfirmDialog({
+      isOpen: true,
+      title: props.username + ", Are you sure you want to Logout ?",
+      subTitle: "You can't revert this operation",
+      action: "Yes",
+      confirmBtnStyle: {
+        backgroundColor: "#2c4ea9",
+        color: "white",
+      },
+      onConfirm: () => {
+        navigate("/");
+      },
+    });
+  }
+
   return (
     <>
       <Box
@@ -79,14 +107,14 @@ function Navbar(props) {
               <Tab
                 icon={<AccountCircleIcon />}
                 className={classes.nav__text}
-                label="My Profile"
+                label={props.username}
               />
             </NavLink>
             <NavLink
               smooth
-              to="/"
+              to="#"
               className={classes.nav__text}
-              style={navLinkStyle}
+              // style={navLinkStyle}
             >
               <Tab
                 icon={<LogoutIcon />}
@@ -98,6 +126,10 @@ function Navbar(props) {
           </div>
         </Tabs>
       </Box>
+      <ConfirmDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+      />
     </>
   );
 }

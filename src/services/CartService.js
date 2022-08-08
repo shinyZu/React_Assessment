@@ -1,10 +1,10 @@
 import axios from "../axios";
 
-class LoginService {
-  userLogin = async (data) => {
+class CartService {
+  getAllCarts = async () => {
     const promise = new Promise((resolve, reject) => {
       axios
-        .post("auth/login", data)
+        .get("carts")
         .then((res) => {
           return resolve(res);
         })
@@ -15,4 +15,4 @@ class LoginService {
     return await promise;
   };
 }
-export default new LoginService();
+export default new CartService();

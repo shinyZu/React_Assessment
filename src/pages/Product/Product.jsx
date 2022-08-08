@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { styleSheet } from "./style";
 import { withStyles } from "@mui/styles";
 import Navbar from "../../components/Navbar/Navbar";
@@ -20,11 +20,18 @@ function Product(props) {
     category: "",
     description: "",
   });
+
+  const [userName, setUserName] = useState("");
+
+  useEffect(() => {
+    setUserName(JSON.parse(localStorage.getItem("userName")));
+  }, []);
+
   function saveProduct() {}
   function clearFieldsOnClick() {}
   return (
     <>
-      <Navbar />
+      <Navbar username={userName} />
       <Grid
         container
         xl={12}

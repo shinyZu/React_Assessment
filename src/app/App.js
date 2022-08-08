@@ -4,6 +4,7 @@ import Dashboard from "../pages/Dashboard/Dashboard";
 import Login from "../pages/Login/Login";
 import Product from "../pages/Product/Product";
 import Register from "../pages/Register/Register";
+import Profile from "../pages/Profile/Profile";
 import NotFound from "../pages/Session/NotFound";
 import "./App.css";
 
@@ -16,7 +17,7 @@ function App() {
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/product" element={<Product />}></Route>
         <Route path="/cart" element={<Cart />}></Route>
-        <Route path="/profile" element={<Cart />}></Route>
+        <Route path="/profile" element={<Profile />}></Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

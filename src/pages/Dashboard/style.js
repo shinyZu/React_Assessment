@@ -10,8 +10,8 @@ export const styleSheet = {
 
   dashboard_container_1_1: {
     // border: "2px solid blue",
-    height: "50vh",
-    margin: "10px auto",
-    marginTop: "30px",
+    // height: "50vh",
+    // margin: "10px auto",
+    // marginTop: "30px",
   },
 };

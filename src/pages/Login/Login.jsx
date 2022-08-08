@@ -11,13 +11,14 @@ import { Grid } from "@mui/material";
 // import { useAuth } from "../Session/Auth";
 import MySnackBar from "../../components/common/Snackbar/MySnackbar";
 import Paper from "@mui/material/Paper";
+import LoginService from "../../services/LoginService";
+import jwt_decode from "jwt-decode";
 
 function Login(props) {
   const { classes } = props;
   const [loginFormData, setLoginFormData] = useState({
-    email: "",
+    username: "",
     password: "",
-    userStatus: "",
   });
 
   const [openErrorMessage, setOpenErrorMessage] = useState({
@@ -26,6 +27,37 @@ function Login(props) {
     severity: "",
     variant: "",
   });
+
+  const [usernameFromToken, setUsernameFromToken] = useState("");
+
+  const navigate = useNavigate();
+
+  async function userLogin() {
+    // console.log(loginFormData);
+
+    let res = await LoginService.userLogin(loginFormData);
+    console.log(res);
+    if (res.status === 200) {
+      setUsernameFromToken(res.data.token);
+      // console.log(jwt_decode(usernameFromToken).user);
+      localStorage.setItem(
+        "userName",
+        JSON.stringify(jwt_decode(usernameFromToken).user)
+      );
+      navigate(
+        "/dashboard" /* , {
+        state: { username: jwt_decode(usernameFromToken).user },
+      } */
+      );
+    } else {
+      setOpenErrorMessage({
+        open: true,
+        alert: res.response.data,
+        severity: "error",
+        variant: "standard",
+      });
+    }
+  }
 
   return (
     <>
@@ -68,7 +100,7 @@ function Login(props) {
               <PersonIcon className={classes.login__icon} />
             </div>
 
-            <ValidatorForm className="pt-2" /* onSubmit={logUser} */>
+            <ValidatorForm className="pt-2" onSubmit={userLogin}>
               <Grid
                 container
                 lg={12}
@@ -90,23 +122,21 @@ function Login(props) {
                 >
                   <TextValidator
                     // id="outlined-basic"
-                    label="Email"
-                    type="email"
+                    label="Username"
+                    type="text"
                     variant="outlined"
                     size="small"
                     fullWidth
                     required={true}
                     // style={{ marginBottom: "5px" }}
                     // style={{ marginLeft: "10px" }}
-                    validators={[
-                      "matchRegexp:^[A-z|0-9]{4,}@(gmail)(.com|.lk)$",
-                    ]}
-                    errorMessages={["invalid email address"]}
-                    value={loginFormData.email}
+                    validators={["matchRegexp:^[A-z0-9-]*$"]}
+                    // errorMessages={["Invalid email address"]}
+                    value={loginFormData.username}
                     onChange={(e) => {
                       setLoginFormData({
                         ...loginFormData,
-                        email: e.target.value,
+                        username: e.target.value,
                       });
                     }}
                   />
@@ -131,8 +161,8 @@ function Login(props) {
                     required={true}
                     style={{ marginBottom: "5px" }}
                     // style={{ marginLeft: "10px" }}
-                    validators={["matchRegexp:^[A-z|0-9|@]{8,}$"]}
-                    errorMessages={["must have atleast 8 characters"]}
+                    // validators={["matchRegexp:^[A-z|0-9|@]{8,}$"]}
+                    // errorMessages={["must have atleast 8 characters"]}
                     value={loginFormData.password}
                     onChange={(e) => {
                       setLoginFormData({
