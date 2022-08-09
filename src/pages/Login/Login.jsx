@@ -66,142 +66,196 @@ function Login(props) {
 
   return (
     <>
-      <div className={classes.login__overlay}>
-        <Paper
-          sx={{
-            backgroundImage: `url("https://www.transparenttextures.com/patterns/wall-4-light.png"); !important`,
-          }}
-          elevation={12}
-          style={{
-            borderRadius: "20px",
-          }}
+      <Grid
+        container
+        xl={12}
+        lg={12}
+        md={12}
+        xs={12}
+        sm={12}
+        // style={{ border: "2px solid red" }}
+        rowGap={2}
+        className={classes.login__overlay}
+        justifyContent="center"
+        alignItems="center"
+      >
+        {/* <div className={classes.login__overlay}> */}
+        <Grid
+          container
+          xl={7}
+          lg={7}
+          md={12}
+          xs={12}
+          sm={12}
+          // style={{ border: "2px solid green" }}
+          // rowGap={2}
           className={classes.login__container}
+          justifyContent="center"
+          alignItems="center"
         >
-          <img src={login__img} className={classes.login__left} width="380px" />
-
-          <p className={classes.login__closeBtn} onClick={props.onClose}>
-            {/* X */}
-          </p>
-
           <Paper
             sx={{
-              p: "20px 0px",
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              width: "100%",
+              backgroundImage: `url("https://www.transparenttextures.com/patterns/wall-4-light.png"); !important`,
             }}
-            elevation={0}
+            elevation={12}
             style={{
               borderRadius: "20px",
             }}
-            className={classes.login__right}
+            className={classes.login__container}
           >
-            <div className={classes.login__title}>
-              <Typography className={classes.font__family} variant="h4">
-                Login
-              </Typography>
-              <PersonIcon className={classes.login__icon} />
-            </div>
+            <Grid
+              container
+              xl={12}
+              lg={12}
+              md={6}
+              xs={6}
+              sm={6}
+              // style={{ border: "2px solid red" }}
+              rowGap={2}
+              className={classes.login__left}
+            >
+              <img
+                src={login__img}
+                /* className={classes.login__left }*/ width="380px"
+              />
+            </Grid>
 
-            <ValidatorForm className="pt-2" onSubmit={userLogin}>
-              <Grid
-                container
-                lg={12}
-                md={12}
-                xs={12}
-                sm={12}
-                // style={{ border: "2px solid red" }}
-                rowGap={2}
-                className={classes.login__content}
-              >
-                <Grid
-                  item
-                  lg={12}
-                  md={12}
-                  xs={12}
-                  sm={12}
-                  // style={{ border: "2px solid red" }}
-                  // className={classes.register__content}
-                >
-                  <TextValidator
-                    // id="outlined-basic"
-                    label="Username"
-                    type="text"
-                    variant="outlined"
-                    size="small"
-                    fullWidth
-                    required={true}
-                    // style={{ marginBottom: "5px" }}
-                    // style={{ marginLeft: "10px" }}
-                    validators={["matchRegexp:^[A-z0-9-]*$"]}
-                    // errorMessages={["Invalid email address"]}
-                    value={loginFormData.username}
-                    onChange={(e) => {
-                      setLoginFormData({
-                        ...loginFormData,
-                        username: e.target.value,
-                      });
-                    }}
-                  />
-                </Grid>
-                <Grid
-                  // container
-                  item
-                  lg={12}
-                  md={12}
-                  xs={12}
-                  sm={12}
-                  // style={{ border: "2px solid red" }}
-                  // className={classes.login__content}
-                >
-                  <TextValidator
-                    // id="outlined-basic"
-                    label="Password"
-                    type="password"
-                    variant="outlined"
-                    size="small"
-                    fullWidth
-                    required={true}
-                    style={{ marginBottom: "5px" }}
-                    // style={{ marginLeft: "10px" }}
-                    // validators={["matchRegexp:^[A-z|0-9|@]{8,}$"]}
-                    // errorMessages={["must have atleast 8 characters"]}
-                    value={loginFormData.password}
-                    onChange={(e) => {
-                      setLoginFormData({
-                        ...loginFormData,
-                        password: e.target.value,
-                      });
-                    }}
-                  />
-                </Grid>
-
-                <Grid
-                  container
-                  lg={12}
-                  md={12}
-                  xs={12}
-                  sm={12}
-                  // style={{ border: "2px solid red" }}
-                  // className={classes.register__content}
-                  className={classes.login_btn_container}
-                >
-                  <button className={classes.btn__login}>Login</button>
-                </Grid>
-              </Grid>
-            </ValidatorForm>
-
-            <div className={classes.login__footer}>
-              <p>
-                Create a new user account? &nbsp;{" "}
-                <Link to="/register">Register</Link>
+            <Grid
+              item
+              xl={12}
+              lg={12}
+              md={12}
+              xs={12}
+              sm={12}
+              // style={{ border: "2px solid red" }}
+              // rowGap={2}
+              className={classes.login__right}
+            >
+              <p className={classes.login__closeBtn} onClick={props.onClose}>
+                {/* X */}
               </p>
-            </div>
+              <Paper
+                sx={{
+                  p: "20px 0px",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                  width: "100%",
+                }}
+                elevation={0}
+                style={{
+                  borderRadius: "20px",
+                }}
+                // className={classes.login__right}
+              >
+                <div className={classes.login__title}>
+                  <Typography className={classes.font__family} variant="h4">
+                    Login
+                  </Typography>
+                  <PersonIcon className={classes.login__icon} />
+                </div>
+
+                <ValidatorForm className="pt-2" onSubmit={userLogin}>
+                  <Grid
+                    container
+                    lg={12}
+                    md={12}
+                    xs={12}
+                    sm={12}
+                    // style={{ border: "2px solid red" }}
+                    rowGap={2}
+                    className={classes.login__content}
+                  >
+                    <Grid
+                      item
+                      lg={12}
+                      md={12}
+                      xs={12}
+                      sm={12}
+                      // style={{ border: "2px solid red" }}
+                      // className={classes.register__content}
+                    >
+                      <TextValidator
+                        // id="outlined-basic"
+                        label="Username"
+                        type="text"
+                        variant="outlined"
+                        size="small"
+                        fullWidth
+                        required={true}
+                        // style={{ marginBottom: "5px" }}
+                        // style={{ marginLeft: "10px" }}
+                        validators={["matchRegexp:^[A-z0-9-]*$"]}
+                        // errorMessages={["Invalid email address"]}
+                        value={loginFormData.username}
+                        onChange={(e) => {
+                          setLoginFormData({
+                            ...loginFormData,
+                            username: e.target.value,
+                          });
+                        }}
+                      />
+                    </Grid>
+                    <Grid
+                      // container
+                      item
+                      lg={12}
+                      md={12}
+                      xs={12}
+                      sm={12}
+                      // style={{ border: "2px solid red" }}
+                      // className={classes.login__content}
+                    >
+                      <TextValidator
+                        // id="outlined-basic"
+                        label="Password"
+                        type="password"
+                        variant="outlined"
+                        size="small"
+                        fullWidth
+                        required={true}
+                        style={{ marginBottom: "5px" }}
+                        // style={{ marginLeft: "10px" }}
+                        // validators={["matchRegexp:^[A-z|0-9|@]{8,}$"]}
+                        // errorMessages={["must have atleast 8 characters"]}
+                        value={loginFormData.password}
+                        onChange={(e) => {
+                          setLoginFormData({
+                            ...loginFormData,
+                            password: e.target.value,
+                          });
+                        }}
+                      />
+                    </Grid>
+
+                    <Grid
+                      container
+                      lg={12}
+                      md={12}
+                      xs={12}
+                      sm={12}
+                      // style={{ border: "2px solid red" }}
+                      // className={classes.register__content}
+                      className={classes.login_btn_container}
+                    >
+                      <button className={classes.btn__login}>Login</button>
+                    </Grid>
+                  </Grid>
+                </ValidatorForm>
+
+                <div className={classes.login__footer}>
+                  <p>
+                    Create a new user account? &nbsp;{" "}
+                    <Link to="/register">Register</Link>
+                  </p>
+                </div>
+              </Paper>
+            </Grid>
           </Paper>
-        </Paper>
-      </div>
+        </Grid>
+        {/* </div> */}
+      </Grid>
       <MySnackBar
         open={openErrorMessage.open}
         alert={openErrorMessage.alert}

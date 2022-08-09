@@ -7,7 +7,7 @@ import Typography from "@mui/material/Typography";
 import Autocomplete from "@mui/material/Autocomplete";
 import TextField from "@mui/material/TextField";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
-import sample_img from "../../assets/images/question.jpg";
+import sample_img from "../../assets/images/question2.png";
 import FileChooser from "../../components/FileChooser/FileChooser";
 import MyTextValidator from "../../components/common/TextValidator/TextValidator.jsx";
 import ProductService from "../../services/ProductService";
@@ -117,7 +117,7 @@ function Product(props) {
       const { result } = e.target;
       // console.log(files); // FileList {0: File, length: 1}
       // console.log(result); // data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEASABIAAD/7QP0UGhvdG9zaG9wIDMuMAA4QklNA+0AAAAAABAASAAAAAEAAQBIAAAAAQABOEJJTQQEAAAAAAOfHAFaAAMbJUccAQAAAgAEHAIAAAIABBwCBQAuTWFuIE9wZW4gR3JvY2VyeSBTdG9yZSBEb29yIEN1c3RvbWVyIHdpdGggRm9vZBwCGQAFc3RvcmUcAhkACSBjdXN0b21lchwCGQAMIHN1cGVybWFya2V0HAIZAAggZ3JvY2VyeRwCGQAHIG1hcmtldBwCGQAFIGZvb2QcAhkAByByZXRhaWwcAhkABiB3b21hbhwCGQAHIHBlb3BsZRwCGQAFIHNob3AcAhkAByBmZW1hbGUcAhkABSBzYWxlHAIZAAkgcHVyY2hhc2UcAhkACiB2ZWdldGFibGUcAhkABiBmcnVpdBwCGQAHIHZlY3RvchwCGQANIGlsbHVzdHJhdGlv........
-      if (result) {
+      if (result && fileReader.readyState === 2) {
         setProductImg(result); // url
       }
     };
@@ -182,9 +182,10 @@ function Product(props) {
           sm={11}
           style={{
             // border: "2px solid blue",
-            // marginTop: "1%",
-            padding: "50px 0px 10px 0px",
+            // marginTop: "2%",
+            // padding: "50px 0px 10px 0px",
             height: "fit-content",
+            // height: "400px",
           }}
         >
           <ValidatorForm onSubmit={saveProduct} style={{ width: "100%" }}>
@@ -202,9 +203,9 @@ function Product(props) {
                 gridtType="item"
                 xl={5.8}
                 lg={5.8}
-                md={5.8}
-                xs={5.8}
-                sm={5.8}
+                md={12}
+                xs={12}
+                sm={12}
                 label="Title"
                 type="text"
                 variant="outlined"
@@ -226,9 +227,9 @@ function Product(props) {
                 gridtType="item"
                 xl={5.8}
                 lg={5.8}
-                md={5.8}
-                xs={5.8}
-                sm={5.8}
+                md={12}
+                xs={12}
+                sm={12}
                 label="Price"
                 type="number"
                 variant="outlined"
@@ -261,14 +262,15 @@ function Product(props) {
                 item
                 xl={5.8}
                 lg={5.8}
-                md={5.8}
-                xs={5.8}
-                sm={5.8}
+                md={12}
+                xs={12}
+                sm={12}
                 // style={{ border: "2px solid blue" }}
               >
                 <Autocomplete
                   id="category"
                   disablePortal
+                  style={{ marginBottom: "7vh" }}
                   value={productFormData.category}
                   options={categories}
                   renderInput={(params) => (
@@ -288,9 +290,9 @@ function Product(props) {
                 gridtType="item"
                 xl={5.8}
                 lg={5.8}
-                md={5.8}
-                xs={5.8}
-                sm={5.8}
+                md={12}
+                xs={12}
+                sm={12}
                 label="Description"
                 type="text"
                 variant="outlined"
@@ -298,7 +300,7 @@ function Product(props) {
                 multiline={true}
                 minRows={2}
                 required={true}
-                // style={{ marginBottom: "7vh" }}
+                style={{ marginBottom: "2vh" }}
                 value={productFormData.description}
                 onChange={(e) => {
                   setProductFormdata({
@@ -313,9 +315,9 @@ function Product(props) {
               container
               xl={5.8}
               lg={5.8}
-              md={5.8}
-              xs={5.8}
-              sm={5.8}
+              md={12}
+              xs={12}
+              sm={12}
               // style={{ border: "2px solid red" }}
               justifyContent="start"
               direction="row"
@@ -341,7 +343,7 @@ function Product(props) {
                       ...productFormData,
                       image: e.target.files[0].name,
                     });
-                    console.log(productFormData);
+                    // console.log(productFormData);
                   }}
                 />
               </Grid>
@@ -354,7 +356,12 @@ function Product(props) {
               md={12}
               xs={12}
               sm={12}
-              // style={{ border: "2px solid red" }}
+              style={
+                {
+                  /* border: "2px solid red",  */
+                  /* marginTop: "30px"  */
+                }
+              }
               className={classes.save_btn_container}
               justifyContent="end"
             >
@@ -366,6 +373,7 @@ function Product(props) {
                 xs={6}
                 sm={6}
                 //   style={{ border: "2px solid red" }}
+
                 justifyContent="end"
               >
                 <button

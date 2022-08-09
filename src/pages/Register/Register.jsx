@@ -352,7 +352,7 @@ function Register(props) {
     console.log(user);
     setConfirmDialog({
       isOpen: true,
-      title: "Are you sure you want to remove this User?",
+      title: 'Are you sure you want to remove User  "' + user.username + '" ?',
       subTitle: "You can't revert this operation",
       confirmBtnStyle: { backgroundColor: "red", color: "white" },
       action: "Delete",
@@ -456,9 +456,9 @@ function Register(props) {
                   gridType="item"
                   xl={5.8}
                   lg={5.8}
-                  md={5.8}
-                  xs={5.8}
-                  sm={5.8}
+                  md={12}
+                  xs={12}
+                  sm={12}
                   label="First Name"
                   type="text"
                   variant="outlined"
@@ -479,9 +479,9 @@ function Register(props) {
                   gridType="item"
                   xl={5.8}
                   lg={5.8}
-                  md={5.8}
-                  xs={5.8}
-                  sm={5.8}
+                  md={12}
+                  xs={12}
+                  sm={12}
                   label="Last Name"
                   type="text"
                   variant="outlined"
@@ -518,9 +518,9 @@ function Register(props) {
                   gridType="item"
                   xl={5.8}
                   lg={5.8}
-                  md={5.8}
-                  xs={5.8}
-                  sm={5.8}
+                  md={12}
+                  xs={12}
+                  sm={12}
                   label="Email"
                   type="email"
                   variant="outlined"
@@ -542,14 +542,15 @@ function Register(props) {
                   gridType="item"
                   xl={5.8}
                   lg={5.8}
-                  md={5.8}
-                  xs={5.8}
-                  sm={5.8}
+                  md={12}
+                  xs={12}
+                  sm={12}
                   label="Username"
                   type="text"
                   variant="outlined"
                   fullWidth
                   required={true}
+                  style={{ marginBottom: "15px" }}
                   validators={["matchRegexp:^[A-z0-9]*$"]}
                   errorMessages={["Invalid Name"]}
                   value={regFormData.username}
@@ -576,9 +577,9 @@ function Register(props) {
                   gridType="item"
                   xl={5.8}
                   lg={5.8}
-                  md={5.8}
-                  xs={5.8}
-                  sm={5.8}
+                  md={12}
+                  xs={12}
+                  sm={12}
                   label="Password"
                   type="password"
                   variant="outlined"
@@ -600,14 +601,15 @@ function Register(props) {
                   gridType="item"
                   xl={5.8}
                   lg={5.8}
-                  md={5.8}
-                  xs={5.8}
-                  sm={5.8}
+                  md={12}
+                  xs={12}
+                  sm={12}
                   label="City"
                   type="text"
                   variant="outlined"
                   fullWidth
                   required={true}
+                  style={{ marginBottom: "15px" }}
                   // validators={["matchRegexp:^[A-z0-9]*$"]}
                   // errorMessages={["Invalid City Name"]}
                   value={regFormData.address.city}
@@ -638,9 +640,9 @@ function Register(props) {
                   gridType="item"
                   xl={5.8}
                   lg={5.8}
-                  md={5.8}
-                  xs={5.8}
-                  sm={5.8}
+                  md={12}
+                  xs={12}
+                  sm={12}
                   label="Street"
                   type="text"
                   variant="outlined"
@@ -666,14 +668,15 @@ function Register(props) {
                   gridType="item"
                   xl={5.8}
                   lg={5.8}
-                  md={5.8}
-                  xs={5.8}
-                  sm={5.8}
+                  md={12}
+                  xs={12}
+                  sm={12}
                   label="Street No"
                   type="text"
                   variant="outlined"
                   fullWidth
                   required={true}
+                  style={{ marginBottom: "15px" }}
                   validators={["matchRegexp:^[A-z0-9]*$"]}
                   errorMessages={["Invalid Characters"]}
                   value={regFormData.address.number}
@@ -704,9 +707,9 @@ function Register(props) {
                   gridType="item"
                   xl={5.8}
                   lg={5.8}
-                  md={5.8}
-                  xs={5.8}
-                  sm={5.8}
+                  md={12}
+                  xs={12}
+                  sm={12}
                   label="Zip Code"
                   type="text"
                   variant="outlined"
@@ -732,9 +735,9 @@ function Register(props) {
                   gridType="item"
                   xl={5.8}
                   lg={5.8}
-                  md={5.8}
-                  xs={5.8}
-                  sm={5.8}
+                  md={12}
+                  xs={12}
+                  sm={12}
                   label="Lat Value"
                   type="text"
                   // minlength="0.0"
@@ -742,6 +745,7 @@ function Register(props) {
                   variant="outlined"
                   fullWidth
                   required={true}
+                  style={{ marginBottom: "15px" }}
                   // validators={["matchRegexp:^[0-9.-]*$"]}
                   // errorMessages={["Invalid Lat Value"]}
                   value={regFormData.address.geolocation.lat}
@@ -778,9 +782,9 @@ function Register(props) {
                   gridType="item"
                   xl={5.8}
                   lg={5.8}
-                  md={5.8}
-                  xs={5.8}
-                  sm={5.8}
+                  md={12}
+                  xs={12}
+                  sm={12}
                   label="Long Value"
                   type="text"
                   variant="outlined"
@@ -812,9 +816,9 @@ function Register(props) {
                   gridType="item"
                   xl={5.8}
                   lg={5.8}
-                  md={5.8}
-                  xs={5.8}
-                  sm={5.8}
+                  md={12}
+                  xs={12}
+                  sm={12}
                   label="Mobile No"
                   type="text"
                   variant="outlined"

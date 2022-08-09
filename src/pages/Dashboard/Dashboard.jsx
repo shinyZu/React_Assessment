@@ -13,9 +13,9 @@ import CartService from "../../services/CartService";
 
 function Dashboard(props) {
   const { classes } = props;
-  const [card1, setCard1] = useState("20");
-  const [card2, setCard2] = useState("17");
-  const [card3, setCard3] = useState("08");
+  const [card1, setCard1] = useState("00");
+  const [card2, setCard2] = useState("00");
+  const [card3, setCard3] = useState("00");
 
   const [userName, setUserName] = useState("");
   const { state } = useLocation();

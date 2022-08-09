@@ -46,4 +46,10 @@ export const styleSheet = {
     //   color: "yellow",
     // },
   },
+
+  text__username: {
+    "& .css-1l14upw-MuiButtonBase-root-MuiTab-root": {
+      textTransform: "lowercase",
+    },
+  },
 };

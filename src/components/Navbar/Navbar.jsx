@@ -16,6 +16,7 @@ import ConfirmDialog from "../common/ConfirmDialog/ConfirmDialog";
 function Navbar(props) {
   const { classes } = props;
   const [value, setValue] = useState("");
+  const username = props.username.toLowerCase();
 
   const [confirmDialog, setConfirmDialog] = useState({
     isOpen: false,
@@ -52,6 +53,8 @@ function Navbar(props) {
       },
     });
   }
+
+  console.log(username);
 
   return (
     <>
@@ -110,7 +113,11 @@ function Navbar(props) {
               <Tab
                 icon={<AccountCircleIcon />}
                 className={classes.nav__text}
-                label={props.username}
+                style={{
+                  textTransform: "lowercase",
+                  fontSize: "60px !important",
+                }}
+                label={username}
               />
             </NavLink>
             <NavLink

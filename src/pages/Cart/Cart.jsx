@@ -304,8 +304,10 @@ function Cart(props) {
           sm={11}
           style={{
             // border: "2px solid blue",
-            marginTop: "-5%",
+            // marginTop: "2%",
+            // padding: "10px 0px 10px 0px",
             height: "fit-content",
+            // height: "350px",
           }}
         >
           <ValidatorForm onSubmit={saveOrder} style={{ width: "100%" }}>
@@ -323,9 +325,9 @@ function Cart(props) {
                 item
                 xl={5.8}
                 lg={5.8}
-                md={5.8}
-                xs={5.8}
-                sm={5.8}
+                md={12}
+                xs={12}
+                sm={12}
                 // style={{ border: "2px solid blue" }}
               >
                 <Autocomplete
@@ -364,10 +366,11 @@ function Cart(props) {
                 item
                 xl={5.8}
                 lg={5.8}
-                md={5.8}
-                xs={5.8}
-                sm={5.8}
+                md={12}
+                xs={12}
+                sm={12}
                 // style={{ border: "2px solid blue" }}
+                style={{ marginBottom: "7vh" }}
               >
                 <LocalizationProvider dateAdapter={AdapterDateFns}>
                   <DatePicker
@@ -404,10 +407,11 @@ function Cart(props) {
                 item
                 xl={5.8}
                 lg={5.8}
-                md={5.8}
-                xs={5.8}
-                sm={5.8}
+                md={12}
+                xs={12}
+                sm={12}
                 // style={{ border: "2px solid blue" }}
+                style={{ marginBottom: "7vh" }}
               >
                 <Autocomplete
                   // disablePortal
@@ -462,9 +466,9 @@ function Cart(props) {
                 item
                 xl={5.8}
                 lg={5.8}
-                md={5.8}
-                xs={5.8}
-                sm={5.8}
+                md={12}
+                xs={12}
+                sm={12}
                 // style={{ border: "2px solid blue" }}
               >
                 <Autocomplete

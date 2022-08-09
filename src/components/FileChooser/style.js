@@ -8,7 +8,7 @@ export const styleSheet = {
   upload__btn: {
     border: "1px solid #ccc !important",
     // border: "2px solid red !important",
-    width: "20vw",
+    // width: "20vw",
     height: "40px",
     backgroundColor: "#cbcbcb !important",
     color: "black !important",

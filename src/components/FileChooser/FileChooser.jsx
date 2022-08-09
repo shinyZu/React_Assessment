@@ -3,6 +3,7 @@ import { withStyles } from "@mui/styles";
 import { styleSheet } from "./style.js";
 import Button from "@mui/material/Button";
 import UploadFileIcon from "@mui/icons-material/UploadFile";
+import AddPhotoAlternateIcon from "@mui/icons-material/AddPhotoAlternate";
 import AddAPhotoIcon from "@mui/icons-material/AddAPhoto";
 import { Box } from "@mui/material";
 
@@ -14,14 +15,14 @@ function FileChooser(props) {
       <Button
         component="label"
         variant="outlined"
-        startIcon={<UploadFileIcon />}
+        startIcon={<AddPhotoAlternateIcon />}
         style={props.style}
         className={classes.upload__btn}
       >
         {props.text}
         <input
           type="file"
-          accept="*"
+          accept="image/*"
           hidden
           onChange={(e) => {
             props.onUpload(e);
