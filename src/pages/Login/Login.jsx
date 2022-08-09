@@ -44,11 +44,16 @@ function Login(props) {
         "userName",
         JSON.stringify(jwt_decode(usernameFromToken).user)
       );
-      navigate(
-        "/dashboard" /* , {
-        state: { username: jwt_decode(usernameFromToken).user },
-      } */
-      );
+      console.log(localStorage.length);
+      if (localStorage.length == 0) {
+        navigate("*");
+      } else {
+        navigate(
+          "/dashboard" /* , {
+          state: { username: jwt_decode(usernameFromToken).user },
+        } */
+        );
+      }
     } else {
       setOpenErrorMessage({
         open: true,

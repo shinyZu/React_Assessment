@@ -6,6 +6,7 @@ import Product from "../pages/Product/Product";
 import Register from "../pages/Register/Register";
 import Profile from "../pages/Profile/Profile";
 import NotFound from "../pages/Session/NotFound";
+import RequireAuth from "../pages/Session/RequireAuth";
 import "./App.css";
 
 function App() {
@@ -14,10 +15,38 @@ function App() {
       <Routes>
         <Route path="/" exact element={<Login />}></Route>
         <Route path="/register" element={<Register />}></Route>
-        <Route path="/dashboard" element={<Dashboard />}></Route>
-        <Route path="/product" element={<Product />}></Route>
-        <Route path="/cart" element={<Cart />}></Route>
-        <Route path="/profile" element={<Profile />}></Route>
+        <Route
+          path="/dashboard"
+          element={
+            <RequireAuth>
+              <Dashboard />
+            </RequireAuth>
+          }
+        ></Route>
+        <Route
+          path="/product"
+          element={
+            <RequireAuth>
+              <Product />
+            </RequireAuth>
+          }
+        ></Route>
+        <Route
+          path="/cart"
+          element={
+            <RequireAuth>
+              <Cart />
+            </RequireAuth>
+          }
+        ></Route>
+        <Route
+          path="/profile"
+          element={
+            <RequireAuth>
+              <Profile />
+            </RequireAuth>
+          }
+        ></Route>
         <Route path="*" element={<NotFound />} />
       </Routes>
     </>

@@ -45,6 +45,9 @@ function Navbar(props) {
         color: "white",
       },
       onConfirm: () => {
+        console.log(localStorage.length);
+        localStorage.clear();
+        console.log(localStorage.length);
         navigate("/");
       },
     });
