@@ -42,6 +42,20 @@ export const styleSheet = {
     },
   },
 
+  btn__addToCart: {
+    backgroundColor: "#1abc9c",
+    color: "white",
+    padding: "15px",
+    width: "40%",
+    borderRadius: "5px",
+    border: "none",
+    // marginLeft: "15px",
+    "&:hover": {
+      cursor: "pointer",
+      backgroundColor: "#16a085",
+    },
+  },
+
   btn__clear: {
     backgroundColor: "#95a5a6",
     color: "white",

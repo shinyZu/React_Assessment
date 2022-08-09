@@ -20,6 +20,7 @@ function MyTextValidator(props) {
           type={props.type}
           variant="outlined"
           fullWidth
+          multiLine={props.multiline}
           required={true}
           style={props.style}
           multiline={props.multiline}

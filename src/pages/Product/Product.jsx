@@ -59,7 +59,7 @@ function Product(props) {
   async function saveProduct() {
     console.log(productFormData);
 
-    if (productFormData.image != "") {
+    if (productFormData.image != "" && productFormData.category != "") {
       console.log("empty");
       setConfirmDialog({
         isOpen: true,
@@ -93,7 +93,14 @@ function Product(props) {
           }
         },
       });
-    } else {
+    } else if (productFormData.category == "") {
+      setOpenAlert({
+        open: true,
+        alert: "Please Choose the Product Category!!",
+        severity: "warning",
+        variant: "standard",
+      });
+    } else if (productFormData.image == "") {
       setOpenAlert({
         open: true,
         alert: "Please Choose an Image for the Product!!",
@@ -262,7 +269,7 @@ function Product(props) {
                 <Autocomplete
                   id="category"
                   disablePortal
-                  inputValue={productFormData.category}
+                  value={productFormData.category}
                   options={categories}
                   renderInput={(params) => (
                     <TextField {...params} label="Category" />

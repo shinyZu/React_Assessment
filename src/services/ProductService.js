@@ -1,6 +1,20 @@
 import axios from "../axios";
 
 class ProductService {
+  getSingleProduct = async (id) => {
+    const promise = new Promise((resolve, reject) => {
+      axios
+        .get("products/" + id)
+        .then((res) => {
+          return resolve(res);
+        })
+        .catch((er) => {
+          return resolve(er);
+        });
+    });
+    return await promise;
+  };
+
   getAllProducts = async () => {
     const promise = new Promise((resolve, reject) => {
       axios

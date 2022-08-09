@@ -364,6 +364,7 @@ function Register(props) {
           clearFieldsOnClick();
           setConfirmDialog({ isOpen: false });
         } else {
+          setConfirmDialog({ isOpen: false });
           setOpenAlert({
             open: true,
             alert: res.response.data,
