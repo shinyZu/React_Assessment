@@ -233,7 +233,7 @@ function Cart(props) {
     } else if (titles.length != qtys.length) {
       setOpenAlert({
         open: true,
-        alert: "Title count & Qty doesn't match!!!",
+        alert: "Title count & Quantity count doesn't match!!!",
         severity: "error",
         variant: "standard",
       });
