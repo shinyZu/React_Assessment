@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { withStyles } from "@mui/styles";
 import { styleSheet } from "./style.js";
 import { Grid } from "@mui/material";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Typography from "@mui/material/Typography";
 import { ValidatorForm, TextValidator } from "react-material-ui-form-validator";
 import Box from "@mui/material/Box";
@@ -202,6 +203,8 @@ function Register(props) {
     btnColor: "#1abc9c",
   });
 
+  const [id, setId] = useState("");
+
   function clearFieldsOnClick() {
     setBtnProps({ btnLabel: "Register", btnColor: "#1abc9c" });
     setRegFormData({
@@ -241,10 +244,12 @@ function Register(props) {
     }
   }
 
-  let userId;
+  // let userId;
   async function loadDataToFields(rowId, user) {
     console.log(user);
-    userId = rowId;
+    // userId = rowId + 1;
+    // console.log(userId);
+    setId(rowId + 1);
     setBtnProps({ btnLabel: "Edit User Details", btnColor: "rgb(74 102 165)" });
     setRegFormData({
       email: user.email,
@@ -306,6 +311,7 @@ function Register(props) {
   }
 
   function updateUser() {
+    console.log(id);
     console.log(regFormData);
     setConfirmDialog({
       isOpen: true,
@@ -317,7 +323,7 @@ function Register(props) {
       // },
       confirmBtnStyle: { backgroundColor: "#2c4ea9", color: "white" },
       onConfirm: async () => {
-        let res = await UserService.updateUser(userId, regFormData);
+        let res = await UserService.updateUser(id, regFormData);
         console.log(res);
         if (res.status === 200) {
           setOpenAlert({
@@ -456,8 +462,8 @@ function Register(props) {
                   fullWidth
                   required={true}
                   style={{ marginBottom: "15px" }}
-                  validators={["matchRegexp:^[A-z]*$"]}
-                  errorMessages={["Invalid Name"]}
+                  // validators={["matchRegexp:^[A-z]*$"]}
+                  // errorMessages={["Invalid Name"]}
                   value={regFormData.name.firstname}
                   onChange={(e) => {
                     setRegFormData((prev) => ({
@@ -479,8 +485,8 @@ function Register(props) {
                   fullWidth
                   required={true}
                   style={{ marginBottom: "15px" }}
-                  validators={["matchRegexp:^[A-z]*$"]}
-                  errorMessages={["Invalid Name"]}
+                  // validators={["matchRegexp:^[A-z]*$"]}
+                  // errorMessages={["Invalid Name"]}
                   value={regFormData.name.lastname}
                   onChange={(e) => {
                     // setRegFormData({
@@ -518,8 +524,8 @@ function Register(props) {
                   fullWidth
                   required={true}
                   style={{ marginBottom: "15px" }}
-                  validators={["matchRegexp:^[A-z|0-9]{4,}@(gmail)(.com|.lk)$"]}
-                  errorMessages={["Invalid Email Address"]}
+                  // validators={["matchRegexp:^[A-z|0-9]{4,}@(gmail)(.com|.lk)$"]}
+                  // errorMessages={["Invalid Email Address"]}
                   value={regFormData.email}
                   onChange={(e) => {
                     setRegFormData({
@@ -638,8 +644,8 @@ function Register(props) {
                   fullWidth
                   required={true}
                   style={{ marginBottom: "15px" }}
-                  validators={["matchRegexp:^[A-z0-9\\s]*$"]}
-                  errorMessages={["Invalid Street Name"]}
+                  // validators={["matchRegexp:^[A-z0-9\\s]*$"]}
+                  // errorMessages={["Invalid Street Name"]}
                   value={regFormData.address.street}
                   onChange={(e) => {
                     // setRegFormData({
@@ -913,7 +919,24 @@ function Register(props) {
             </Box>
           </Grid>
         </Grid>
+        <Grid
+          container
+          xl={11}
+          lg={11}
+          md={11}
+          xs={11}
+          sm={11}
+          // style={{ border: "2px solid red" }}
+          justifyContent="end"
+        >
+          <div /* className={classes.login__footer} */>
+            <p>
+              Back To Login Screen? &nbsp; <Link to="/">Login</Link>
+            </p>
+          </div>
+        </Grid>
       </Grid>
+
       <MySnackBar
         open={openAlert.open}
         alert={openAlert.alert}
