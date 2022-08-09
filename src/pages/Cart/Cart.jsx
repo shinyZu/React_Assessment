@@ -13,25 +13,65 @@ import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider";
 import { AdapterDateFns } from "@mui/x-date-pickers/AdapterDateFns";
 import { DatePicker } from "@mui/x-date-pickers/DatePicker";
 import { TimePicker } from "@mui/x-date-pickers/TimePicker";
+import UserService from "../../services/UserService.js";
+import ProductService from "../../services/ProductService.js";
 
 function Cart(props) {
   const { classes } = props;
-  const categories = ["Customer", "Admin", "Driver"];
+  // const categories = ["Customer", "Admin", "Driver"];
   const [date, setDate] = useState(null);
   const [cartFormData, setCartFormData] = useState({
-    username: "",
+    userId: "",
     date: "",
-    title: "",
-    qty: "",
+    productId: "",
+    quantity: "",
   });
+
+  const [usernameList, setUsernameList] = useState([]);
+  const [titleList, setTitleList] = useState([]);
 
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
     setUserName(JSON.parse(localStorage.getItem("userName")));
+    getUsernames();
+    getProductTitles();
   }, []);
 
-  function saveOrder() {}
+  async function getUsernames() {
+    let res = await UserService.getAllUsers();
+    // console.log(res);
+    if (res.status === 200) {
+      let userList = res.data;
+      // console.log(userList);
+      setUsernameList([]);
+      userList.map((user, index) => {
+        // let temp = { userId: user.id, username: user.username };
+        setUsernameList((prev) => {
+          return [...prev, { userId: user.id, username: user.username }];
+        });
+      });
+      console.log(usernameList);
+    }
+  }
+  async function getProductTitles() {
+    let res = await ProductService.getAllProducts();
+    // console.log(res);
+    if (res.status === 200) {
+      let productList = res.data;
+      // console.log(userList);
+      setTitleList([]);
+      productList.map((product, index) => {
+        setTitleList((prev) => {
+          return [...prev, { productId: product.id, title: product.title }];
+        });
+      });
+      console.log(titleList);
+    }
+  }
+  function saveOrder() {
+    console.log(cartFormData);
+  }
   function clearFieldsOnClick() {}
   return (
     <>
@@ -101,16 +141,18 @@ function Cart(props) {
                 <Autocomplete
                   disablePortal
                   id="role"
-                  options={categories}
+                  options={usernameList}
+                  getOptionLabel={(option) => option.username}
                   renderInput={(params) => (
                     <TextField {...params} label="Username" />
                   )}
                   style={{ marginBottom: "7vh" }}
                   disabledItemsFocusable
                   onChange={(e, v) => {
+                    console.log(v);
                     setCartFormData({
                       ...cartFormData,
-                      username: v,
+                      userId: v.userId,
                     });
                   }}
                 />
@@ -131,6 +173,10 @@ function Cart(props) {
                     inputFormat="dd/MM/yyyy"
                     onChange={(newValue) => {
                       setDate(newValue);
+                      setCartFormData({
+                        ...cartFormData,
+                        date: newValue,
+                      });
                     }}
                     renderInput={(params) => (
                       <TextField {...params} fullWidth />
@@ -163,15 +209,17 @@ function Cart(props) {
                 <Autocomplete
                   disablePortal
                   id="role"
-                  options={categories}
+                  options={titleList}
+                  getOptionLabel={(option) => option.title}
                   renderInput={(params) => (
                     <TextField {...params} label="Product Title" />
                   )}
                   disabledItemsFocusable
                   onChange={(e, v) => {
+                    console.log(v);
                     setCartFormData({
                       ...cartFormData,
-                      title: v,
+                      productId: v.productId,
                     });
                   }}
                 />
@@ -193,10 +241,11 @@ function Cart(props) {
                 errorMessages={["Only Input Numbers"]}
                 style={{ marginBottom: "7vh" }}
                 value={cartFormData.qty}
-                onChange={(e) => {
+                onChange={(e, v) => {
                   setCartFormData({
                     ...cartFormData,
-                    qty: e.target.value,
+                    // qty: e.target.value,
+                    quantity: e.target.value,
                   });
                 }}
               />

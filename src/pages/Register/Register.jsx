@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { withStyles } from "@mui/styles";
 import { styleSheet } from "./style.js";
 import { Grid } from "@mui/material";
@@ -11,42 +11,49 @@ import IconButton from "@mui/material/IconButton";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 import MyTextValidator from "../../components/common/TextValidator/TextValidator.jsx";
+import UserService from "../../services/UserService.js";
+import MySnackBar from "../../components/common/Snackbar/MySnackbar";
+import ConfirmDialog from "../../components/common/ConfirmDialog/ConfirmDialog";
 
 function Register(props) {
   const { classes } = props;
 
   const [regFormData, setRegFormData] = useState({
-    firstName: "",
-    lastName: "",
     email: "",
     username: "",
     password: "",
-    city: "",
-    street: "",
-    streetNo: "",
-    zipCode: "",
-    latValue: "",
-    longValue: "",
-    mobileNo: "",
+    name: {
+      firstname: "",
+      lastname: "",
+    },
+    address: {
+      city: "",
+      street: "",
+      number: "",
+      zipcode: "",
+      geolocation: {
+        lat: "",
+        long: "",
+      },
+    },
+    phone: "",
   });
 
-  const rows = [
-    {
-      id: "0",
-      first_name: "john",
-      last_name: "doe",
-      email: "john@gmail.com",
-      username: "johnd",
-      password: "m38rmF$",
-      city: "kilcoole",
-      street: "new road",
-      street_no: "7682",
-      zip_code: "12926-3874",
-      lat_value: "-37.3159",
-      long_value: "81.1496",
-      mobile_no: "1-570-236-7033",
-    },
-  ];
+  const [openAlert, setOpenAlert] = useState({
+    open: "",
+    alert: "",
+    severity: "",
+    variant: "",
+  });
+
+  const [confirmDialog, setConfirmDialog] = useState({
+    isOpen: false,
+    title: "",
+    subTitle: "",
+    confirmBtnStyle: {},
+    action: "",
+  });
+
   const columns = [
     {
       field: "id",
@@ -62,7 +69,7 @@ function Register(props) {
                   onClick={() => {
                     console.log("clicked row : " + cellValues.id);
                     // console.log(carData[cellValues.id]);
-                    // loadDataToFields(cellValues.id, carData[cellValues.id]);
+                    loadDataToFields(cellValues.id, users[cellValues.id]);
                   }}
                 />
               </IconButton>
@@ -74,7 +81,7 @@ function Register(props) {
                   // fontSize="large"
                   onClick={() => {
                     console.log("clicked row : " + cellValues.id);
-                    // deleteCar(carData[cellValues.id]);
+                    deleteUser(users[cellValues.id]);
                   }}
                 />
               </IconButton>
@@ -89,7 +96,7 @@ function Register(props) {
     },
 
     {
-      field: "first_name",
+      field: "firstname",
       headerName: "First Name",
       width: 130,
       headerClassName: "header_color",
@@ -98,7 +105,7 @@ function Register(props) {
     },
 
     {
-      field: "last_name",
+      field: "lastname",
       headerName: "Last Name",
       width: 140,
       headerClassName: "header_color",
@@ -143,7 +150,7 @@ function Register(props) {
     },
 
     {
-      field: "street_no",
+      field: "number",
       headerName: "Street No",
       width: 130,
       headerClassName: "header_color",
@@ -152,7 +159,7 @@ function Register(props) {
     },
 
     {
-      field: "zip_code",
+      field: "zipcode",
       headerName: "Zip Code",
       width: 130,
       headerClassName: "header_color",
@@ -161,7 +168,7 @@ function Register(props) {
     },
 
     {
-      field: "lat_value",
+      field: "lat",
       headerName: "Lat Value",
       width: 130,
       headerClassName: "header_color",
@@ -170,7 +177,7 @@ function Register(props) {
     },
 
     {
-      field: "long_value",
+      field: "long",
       headerName: "Long Value",
       width: 130,
       headerClassName: "header_color",
@@ -179,7 +186,7 @@ function Register(props) {
     },
 
     {
-      field: "mobile_no",
+      field: "phone",
       headerName: "Mobile No",
       width: 130,
       headerClassName: "header_color",
@@ -188,25 +195,184 @@ function Register(props) {
     },
   ];
 
+  const [users, setUsers] = useState([]);
+
+  const [btnProps, setBtnProps] = useState({
+    btnLabel: "Register",
+    btnColor: "#1abc9c",
+  });
+
   function clearFieldsOnClick() {
+    setBtnProps({ btnLabel: "Register", btnColor: "#1abc9c" });
     setRegFormData({
-      firstName: "",
-      lastName: "",
       email: "",
       username: "",
       password: "",
-      city: "",
-      street: "",
-      streetNo: "",
-      zipCode: "",
-      latValue: "",
-      longValue: "",
-      mobileNo: "",
+      name: {
+        firstname: "",
+        lastname: "",
+      },
+      address: {
+        city: "",
+        street: "",
+        number: "",
+        zipcode: "",
+        geolocation: {
+          lat: "",
+          long: "",
+        },
+      },
+      phone: "",
+    });
+  }
+
+  useEffect(() => {
+    getAllUsers();
+  }, []);
+
+  async function getAllUsers() {
+    let res = await UserService.getAllUsers();
+    console.log(res);
+    if (res.status === 200) {
+      setUsers(() => {
+        return [...res.data];
+      });
+      console.log(users);
+    }
+  }
+
+  let userId;
+  async function loadDataToFields(rowId, user) {
+    console.log(user);
+    userId = rowId;
+    setBtnProps({ btnLabel: "Edit User Details", btnColor: "rgb(74 102 165)" });
+    setRegFormData({
+      email: user.email,
+      username: user.username,
+      password: user.password,
+      name: {
+        firstname: user.name.firstname,
+        lastname: user.name.lastname,
+      },
+      address: {
+        city: user.address.city,
+        street: user.address.street,
+        number: user.address.number,
+        zipcode: user.address.zipcode,
+        geolocation: {
+          lat: user.address.geolocation.lat,
+          long: user.address.geolocation.long,
+        },
+      },
+      phone: user.phone,
     });
   }
 
   function registerUser() {
     console.log(regFormData);
+    setConfirmDialog({
+      isOpen: true,
+      title: "Are you sure you want to Register ?",
+      subTitle: "Your username will be " + regFormData.username,
+      action: "Save",
+      confirmBtnStyle: {
+        backgroundColor: "rgb(26, 188, 156)",
+        color: "white",
+      },
+      onConfirm: async () => {
+        let res = await UserService.registerUser(regFormData);
+        console.log(res);
+        if (res.status === 200) {
+          setOpenAlert({
+            open: true,
+            alert: "User Registered Successfully",
+            severity: "success",
+            variant: "standard",
+          });
+          getAllUsers();
+          clearFieldsOnClick();
+          setConfirmDialog({ isOpen: false });
+        } else {
+          setConfirmDialog({ isOpen: false });
+          setOpenAlert({
+            open: true,
+            alert: res.response.data,
+            severity: "error",
+            variant: "standard",
+          });
+        }
+      },
+    });
+  }
+
+  function updateUser() {
+    console.log(regFormData);
+    setConfirmDialog({
+      isOpen: true,
+      title: "Are you sure you want to Update User Details ?",
+      subTitle: "You can't revert this operation",
+      // confirmBtnStyle: {
+      //   backgroundColor: "rgb(26, 188, 156)",
+      //   color: "white",
+      // },
+      confirmBtnStyle: { backgroundColor: "#2c4ea9", color: "white" },
+      onConfirm: async () => {
+        let res = await UserService.updateUser(userId, regFormData);
+        console.log(res);
+        if (res.status === 200) {
+          setOpenAlert({
+            open: true,
+            alert: "User Updated Successfully",
+            severity: "success",
+            variant: "standard",
+          });
+          clearFieldsOnClick();
+          getAllUsers();
+          setConfirmDialog({ isOpen: false });
+        } else {
+          setConfirmDialog({ isOpen: false });
+          setOpenAlert({
+            open: true,
+            alert: res.response.data,
+            severity: "error",
+            variant: "standard",
+          });
+        }
+      },
+    });
+  }
+
+  function deleteUser(user) {
+    console.log(user);
+    setConfirmDialog({
+      isOpen: true,
+      title: "Are you sure you want to remove this User?",
+      subTitle: "You can't revert this operation",
+      confirmBtnStyle: { backgroundColor: "red", color: "white" },
+      action: "Delete",
+      onConfirm: async () => {
+        console.log(user.id);
+        let res = await UserService.deleteUser(user.id);
+        if (res.status === 200) {
+          setOpenAlert({
+            open: true,
+            alert: "User Deleted Succesfully!",
+            severity: "success",
+            variant: "standard",
+          });
+          getAllUsers();
+          clearFieldsOnClick();
+          setConfirmDialog({ isOpen: false });
+        } else {
+          setOpenAlert({
+            open: true,
+            alert: res.response.data,
+            severity: "error",
+            variant: "standard",
+          });
+        }
+      },
+    });
   }
 
   return (
@@ -259,7 +425,13 @@ function Register(props) {
             }}
             rowGap={20}
           >
-            <ValidatorForm onSubmit={registerUser} style={{ width: "100%" }}>
+            <ValidatorForm
+              // onSubmit={registerUser} style={{ width: "100%" }}
+              onSubmit={
+                btnProps.btnLabel == "Register" ? registerUser : updateUser
+              }
+              style={{ width: "100%" }}
+            >
               <Grid
                 container
                 xl={12}
@@ -285,12 +457,12 @@ function Register(props) {
                   style={{ marginBottom: "15px" }}
                   validators={["matchRegexp:^[A-z]*$"]}
                   errorMessages={["Invalid Name"]}
-                  value={regFormData.firstName}
+                  value={regFormData.name.firstname}
                   onChange={(e) => {
-                    setRegFormData({
-                      ...regFormData,
-                      firstName: e.target.value,
-                    });
+                    setRegFormData((prev) => ({
+                      ...prev,
+                      name: { ...prev.name, firstname: e.target.value },
+                    }));
                   }}
                 />
                 <MyTextValidator
@@ -308,12 +480,16 @@ function Register(props) {
                   style={{ marginBottom: "15px" }}
                   validators={["matchRegexp:^[A-z]*$"]}
                   errorMessages={["Invalid Name"]}
-                  value={regFormData.lastName}
+                  value={regFormData.name.lastname}
                   onChange={(e) => {
-                    setRegFormData({
-                      ...regFormData,
-                      lastName: e.target.value,
-                    });
+                    // setRegFormData({
+                    //   ...regFormData,
+                    //   lastname: e.target.value,
+                    // });
+                    setRegFormData((prev) => ({
+                      ...prev,
+                      name: { ...prev.name, lastname: e.target.value },
+                    }));
                   }}
                 />
               </Grid>
@@ -399,8 +575,8 @@ function Register(props) {
                   fullWidth
                   required={true}
                   style={{ marginBottom: "15px" }}
-                  validators={["matchRegexp:^[A-z|0-9|@]{8,}$"]}
-                  errorMessages={["must have atleast 8 characters"]}
+                  // validators={["matchRegexp:^[A-z|0-9|@]{8,}$"]}
+                  // errorMessages={["must have atleast 8 characters"]}
                   value={regFormData.password}
                   onChange={(e) => {
                     setRegFormData({
@@ -422,14 +598,18 @@ function Register(props) {
                   variant="outlined"
                   fullWidth
                   required={true}
-                  validators={["matchRegexp:^[A-z0-9]*$"]}
-                  errorMessages={["Invalid City Name"]}
-                  value={regFormData.city}
+                  // validators={["matchRegexp:^[A-z0-9]*$"]}
+                  // errorMessages={["Invalid City Name"]}
+                  value={regFormData.address.city}
                   onChange={(e) => {
-                    setRegFormData({
-                      ...regFormData,
-                      city: e.target.value,
-                    });
+                    // setRegFormData({
+                    //   ...regFormData,
+                    //   city: e.target.value,
+                    // });
+                    setRegFormData((prev) => ({
+                      ...prev,
+                      address: { ...prev.address, city: e.target.value },
+                    }));
                   }}
                 />
               </Grid>
@@ -459,12 +639,16 @@ function Register(props) {
                   style={{ marginBottom: "15px" }}
                   validators={["matchRegexp:^[A-z0-9\\s]*$"]}
                   errorMessages={["Invalid Street Name"]}
-                  value={regFormData.street}
+                  value={regFormData.address.street}
                   onChange={(e) => {
-                    setRegFormData({
-                      ...regFormData,
-                      street: e.target.value,
-                    });
+                    // setRegFormData({
+                    //   ...regFormData,
+                    //   street: e.target.value,
+                    // });
+                    setRegFormData((prev) => ({
+                      ...prev,
+                      address: { ...prev.address, street: e.target.value },
+                    }));
                   }}
                 />
 
@@ -482,12 +666,16 @@ function Register(props) {
                   required={true}
                   validators={["matchRegexp:^[A-z0-9]*$"]}
                   errorMessages={["Invalid Characters"]}
-                  value={regFormData.streetNo}
+                  value={regFormData.address.number}
                   onChange={(e) => {
-                    setRegFormData({
-                      ...regFormData,
-                      streetNo: e.target.value,
-                    });
+                    // setRegFormData({
+                    //   ...regFormData,
+                    //   number: e.target.value,
+                    // });
+                    setRegFormData((prev) => ({
+                      ...prev,
+                      address: { ...prev.address, number: e.target.value },
+                    }));
                   }}
                 />
               </Grid>
@@ -517,12 +705,16 @@ function Register(props) {
                   style={{ marginBottom: "15px" }}
                   validators={["matchRegexp:^[A-z0-9-]*$"]}
                   errorMessages={["Invalid Zip Code"]}
-                  value={regFormData.zipCode}
+                  value={regFormData.address.zipcode}
                   onChange={(e) => {
-                    setRegFormData({
-                      ...regFormData,
-                      zipCode: e.target.value,
-                    });
+                    // setRegFormData({
+                    //   ...regFormData,
+                    //   zipcode: e.target.value,
+                    // });
+                    setRegFormData((prev) => ({
+                      ...prev,
+                      address: { ...prev.address, zipcode: e.target.value },
+                    }));
                   }}
                 />
 
@@ -535,17 +727,29 @@ function Register(props) {
                   sm={5.8}
                   label="Lat Value"
                   type="text"
+                  // minlength="0.0"
+                  // maxlength="8"
                   variant="outlined"
                   fullWidth
                   required={true}
-                  validators={["matchRegexp:^[0-9.-]*$"]}
-                  errorMessages={["Invalid Lat Value"]}
-                  value={regFormData.latValue}
-                  onChange={(e) => {
-                    setRegFormData({
-                      ...regFormData,
-                      latValue: e.target.value,
-                    });
+                  // validators={["matchRegexp:^[0-9.-]*$"]}
+                  // errorMessages={["Invalid Lat Value"]}
+                  value={regFormData.address.geolocation.lat}
+                  onChange={(e, v) => {
+                    // setRegFormData({
+                    //   ...regFormData,
+                    //   lat: e.target.value,
+                    // });
+                    setRegFormData((prev) => ({
+                      ...prev,
+                      address: {
+                        ...prev.address,
+                        geolocation: {
+                          ...prev.address.geolocation,
+                          lat: e.target.value,
+                        },
+                      },
+                    }));
                   }}
                 />
               </Grid>
@@ -573,14 +777,24 @@ function Register(props) {
                   fullWidth
                   required={true}
                   style={{ marginBottom: "15px" }}
-                  validators={["matchRegexp:^[0-9.-]*$"]}
-                  errorMessages={["Invalid Long Value"]}
-                  value={regFormData.longValue}
-                  onChange={(e) => {
-                    setRegFormData({
-                      ...regFormData,
-                      longValue: e.target.value,
-                    });
+                  // validators={["matchRegexp:^[0-9.-]*$"]}
+                  // errorMessages={["Invalid Long Value"]}
+                  value={regFormData.address.geolocation.long}
+                  onChange={(e, v) => {
+                    // setRegFormData({
+                    //   ...regFormData,
+                    //   long: e.target.value,
+                    // });
+                    setRegFormData((prev) => ({
+                      ...prev,
+                      address: {
+                        ...prev.address,
+                        geolocation: {
+                          ...prev.address.geolocation,
+                          long: e.target.value,
+                        },
+                      },
+                    }));
                   }}
                 />
 
@@ -598,11 +812,11 @@ function Register(props) {
                   required={true}
                   validators={["matchRegexp:^[0-9\\-]{14}$"]}
                   errorMessages={["Invalid Mobile No"]}
-                  value={regFormData.mobileNo}
+                  value={regFormData.phone}
                   onChange={(e) => {
                     setRegFormData({
                       ...regFormData,
-                      mobileNo: e.target.value,
+                      phone: e.target.value,
                     });
                   }}
                 />
@@ -635,7 +849,12 @@ function Register(props) {
                   >
                     Clear
                   </button>
-                  <button className={classes.btn__register}>Register</button>
+                  <button
+                    className={classes.btn__register}
+                    style={{ backgroundColor: btnProps.btnColor }}
+                  >
+                    {btnProps.btnLabel}
+                  </button>
                 </Grid>
               </Grid>
             </ValidatorForm>
@@ -672,15 +891,41 @@ function Register(props) {
               }}
             >
               <UserTable
-                rows={rows}
                 columns={columns}
                 pageSize={5}
                 rowsPerPageOptions={[5]}
+                rows={users.map((user, index) => ({
+                  id: user.id,
+                  firstname: user.name.firstname,
+                  lastname: user.name.lastname,
+                  email: user.email,
+                  username: user.username,
+                  city: user.address.city,
+                  street: user.address.street,
+                  number: user.address.number,
+                  zipcode: user.address.zipcode,
+                  lat: user.address.geolocation.lat,
+                  long: user.address.geolocation.long,
+                  phone: user.phone,
+                }))}
               />
             </Box>
           </Grid>
         </Grid>
       </Grid>
+      <MySnackBar
+        open={openAlert.open}
+        alert={openAlert.alert}
+        severity={openAlert.severity}
+        variant={openAlert.variant}
+        onClose={() => {
+          setOpenAlert({ open: false });
+        }}
+      />
+      <ConfirmDialog
+        confirmDialog={confirmDialog}
+        setConfirmDialog={setConfirmDialog}
+      />
     </>
   );
 }

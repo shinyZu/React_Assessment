@@ -48,7 +48,7 @@ body {
 }
 
 ::-webkit-scrollbar-corner {
-  background-color: #1abc9c;
+  background-color: #ecf0f1;
 }
 
 .font__family {
@@ -65,7 +65,7 @@ body {
 
 .css-78trlr-MuiButtonBase-root-MuiIconButton-root {
   /* background-color: rgb(225 218 17 / 72%) !important; */
-  color: #2980b9 !important;
+  color: #273c75 !important;
   height: 45px;
   width: 45px;
   margin-left: 10px;
