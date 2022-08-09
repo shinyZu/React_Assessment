@@ -6,4 +6,4 @@
 <img src = "src/assets/images/screenshots/4.png" alt = "sample"> <br><br>
 <img src = "src/assets/images/screenshots/5.png" alt = "sample"> <br><br>
 <img src = "src/assets/images/screenshots/6.png" alt = "sample"> <br><br>
-<img src = "src/assets/images/screenshots/7.png" alt = "sample"> <br><br>
+<img src = "src/assets/images/screenshots/8.png" alt = "sample"> <br><br>
