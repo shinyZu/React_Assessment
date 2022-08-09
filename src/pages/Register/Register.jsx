@@ -278,7 +278,7 @@ function Register(props) {
     setConfirmDialog({
       isOpen: true,
       title: "Are you sure you want to Register ?",
-      subTitle: "Your username will be " + regFormData.username,
+      subTitle: 'Your username will be  "' + regFormData.username + '"',
       action: "Save",
       confirmBtnStyle: {
         backgroundColor: "rgb(26, 188, 156)",
