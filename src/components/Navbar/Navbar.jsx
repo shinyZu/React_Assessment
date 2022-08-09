@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { styleSheet } from "./style";
 import { withStyles } from "@mui/styles";
 import GridViewIcon from "@mui/icons-material/GridView";
@@ -16,7 +16,8 @@ import ConfirmDialog from "../common/ConfirmDialog/ConfirmDialog";
 function Navbar(props) {
   const { classes } = props;
   const [value, setValue] = useState("");
-  const username = props.username.toLowerCase();
+  // const username = props.username.toLowerCase();
+  const [username, setUsername] = useState("");
 
   const [confirmDialog, setConfirmDialog] = useState({
     isOpen: false,
@@ -33,6 +34,10 @@ function Navbar(props) {
   };
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    setUsername(JSON.parse(localStorage.getItem("userName")));
+  }, []);
 
   function changePage() {}
   function handleCustomerLogout() {
@@ -104,22 +109,21 @@ function Navbar(props) {
             </NavLink>
           </div>
           <div className={classes.nav__right}>
-            <NavLink
+            {/* <NavLink
               smooth
               to="/profile"
               className={classes.nav__text}
               style={navLinkStyle}
-            >
-              <Tab
-                icon={<AccountCircleIcon />}
-                className={classes.nav__text}
-                style={{
-                  textTransform: "lowercase",
-                  fontSize: "60px !important",
-                }}
-                label={username}
-              />
-            </NavLink>
+            > */}
+            <Tab
+              icon={<AccountCircleIcon />}
+              className={classes.nav__text}
+              style={{
+                textTransform: "lowercase",
+              }}
+              label={username}
+            />
+            {/* </NavLink> */}
             <NavLink
               smooth
               to="#"

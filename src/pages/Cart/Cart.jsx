@@ -147,7 +147,7 @@ function Cart(props) {
   });
 
   useEffect(() => {
-    setUserName(JSON.parse(localStorage.getItem("userName")));
+    // setUserName(JSON.parse(localStorage.getItem("userName")));
     getUsernames();
     getProductTitles();
   }, []);
@@ -265,7 +265,7 @@ function Cart(props) {
 
   return (
     <>
-      <Navbar username={userName} />
+      <Navbar /* username={userName} */ />
       <Grid
         container
         xl={12}

@@ -45,7 +45,7 @@ function Product(props) {
   });
 
   useEffect(() => {
-    setUserName(JSON.parse(localStorage.getItem("userName")));
+    // setUserName(JSON.parse(localStorage.getItem("userName")));
     getAllCategories();
   }, []);
 
@@ -139,7 +139,7 @@ function Product(props) {
 
   return (
     <>
-      <Navbar username={userName} />
+      <Navbar /* username={userName} */ />
       <Grid
         container
         xl={12}

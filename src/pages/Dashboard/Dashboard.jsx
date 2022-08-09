@@ -26,7 +26,7 @@ function Dashboard(props) {
     // console.log(userName);
     // localStorage.setItem("userName", JSON.stringify(state.username));
     // console.log(JSON.parse(localStorage.getItem("userName")));
-    setUserName(JSON.parse(localStorage.getItem("userName")));
+    // setUserName(JSON.parse(localStorage.getItem("userName")));
 
     getUserCount();
     getProductCount();
@@ -75,7 +75,7 @@ function Dashboard(props) {
 
   return (
     <>
-      <Navbar username={userName} />
+      <Navbar /* username={userName} */ />
       <Grid
         container
         xl={12}

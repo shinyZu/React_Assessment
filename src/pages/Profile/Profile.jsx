@@ -10,7 +10,7 @@ function Profile() {
 
   return (
     <>
-      <Navbar username={userName} />
+      <Navbar /*  username={userName} */ />
     </>
   );
 }
