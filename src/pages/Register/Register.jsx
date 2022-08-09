@@ -40,6 +40,8 @@ function Register(props) {
     phone: "",
   });
 
+  let allUsers;
+
   const [openAlert, setOpenAlert] = useState({
     open: "",
     alert: "",
@@ -273,41 +275,63 @@ function Register(props) {
     });
   }
 
-  function registerUser() {
+  let isExist;
+  async function registerUser() {
     console.log(regFormData);
-    setConfirmDialog({
-      isOpen: true,
-      title: "Are you sure you want to Register ?",
-      subTitle: 'Your username will be  "' + regFormData.username + '"',
-      action: "Save",
-      confirmBtnStyle: {
-        backgroundColor: "rgb(26, 188, 156)",
-        color: "white",
-      },
-      onConfirm: async () => {
-        let res = await UserService.registerUser(regFormData);
-        console.log(res);
-        if (res.status === 200) {
-          setOpenAlert({
-            open: true,
-            alert: "User Registered Successfully",
-            severity: "success",
-            variant: "standard",
-          });
-          getAllUsers();
-          clearFieldsOnClick();
-          setConfirmDialog({ isOpen: false });
-        } else {
-          setConfirmDialog({ isOpen: false });
-          setOpenAlert({
-            open: true,
-            alert: res.response.data,
-            severity: "error",
-            variant: "standard",
-          });
-        }
-      },
+    users.map((user, index) => {
+      if (user.email === regFormData.email) {
+        console.log(user.email);
+        console.log(regFormData.email);
+        isExist = true;
+        return;
+      }
     });
+
+    if (isExist) {
+      setConfirmDialog({ isOpen: false });
+      setOpenAlert({
+        open: true,
+        alert: "An Account already exist with email " + regFormData.email,
+        severity: "error",
+        variant: "standard",
+      });
+      return;
+    } else {
+      console.log("not equal");
+      setConfirmDialog({
+        isOpen: true,
+        title: "Are you sure you want to Register ?",
+        subTitle: 'Your username will be  "' + regFormData.username + '"',
+        action: "Save",
+        confirmBtnStyle: {
+          backgroundColor: "rgb(26, 188, 156)",
+          color: "white",
+        },
+        onConfirm: async () => {
+          let res = await UserService.registerUser(regFormData);
+          console.log(res);
+          if (res.status === 200) {
+            setOpenAlert({
+              open: true,
+              alert: "User Registered Successfully",
+              severity: "success",
+              variant: "standard",
+            });
+            getAllUsers();
+            clearFieldsOnClick();
+            setConfirmDialog({ isOpen: false });
+          } else {
+            setConfirmDialog({ isOpen: false });
+            setOpenAlert({
+              open: true,
+              alert: res.response.data,
+              severity: "error",
+              variant: "standard",
+            });
+          }
+        },
+      });
+    }
   }
 
   function updateUser() {
