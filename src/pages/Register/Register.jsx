@@ -414,7 +414,10 @@ function Register(props) {
             sm={12}
             style={{ /* border: "2px solid green", */ height: "fit-content" }}
           >
-            <Typography variant="h4" /* style={{ border: "2px solid red" }} */>
+            <Typography
+              variant="h4"
+              color="#405180" /* style={{ border: "2px solid red" }} */
+            >
               User Registration
             </Typography>
           </Grid>
