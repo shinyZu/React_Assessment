@@ -1,4 +1,5 @@
 # React JS Assessment with FakeStore API
+##### (Take Home Assignment 01 - for the module Rapid Application Development(RAD))
 
 <img src = "src/assets/images/screenshots/1.png" alt = "sample"> <br><br>
 <img src = "src/assets/images/screenshots/2.png" alt = "sample"> <br><br>
